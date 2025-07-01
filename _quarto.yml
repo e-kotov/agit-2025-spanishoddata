@@ -1,0 +1,100 @@
+project:
+  type: website
+  output-dir: docs
+
+resources: 
+  - media/*
+
+website:
+  title: "Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps"
+  site-url: https://www.ekotov.pro/agit-2025-spanishoddata/
+  repo-url: https://github.com/e-kotov/agit-2025-spanishoddata
+  open-graph:
+    title: "Mobility Flows and Accessibility Using R and Big Open Data"
+    image: media/card.png
+    image-alt: "Workshop on Mobility Flows and Accessibility Using R and Big Open Data, IC2S2 2025 conference, Norrköping, Sweden, July 21, 2025. Tutors: Egor Kotov & Johannes Mast"
+    description: "Workshop on Mobility Flows and Accessibility Using R and Big Open Data, IC2S2 2025 conference, Norrköping, Sweden, July 21, 2025. Tutors: Egor Kotov & Johannes Mast. This workshop will teach you how to use the R package spanishoddata to access open human mobility data and how to aggregate it with duckdb. We will also explore how to visualize mobility flows and accessibility using R package flowmapper and flowmapblue."
+  page-navigation: true
+  page-footer: 
+      border: true
+      left: "Author: Egor Kotov" 
+      center:
+        - text: "CC0 1.0"
+          href: license.qmd
+      right: 
+        - icon: github
+          href: https://github.com/e-kotov/agit-2025-spanishoddata
+  sidebar:
+    style: "docked"
+    search: true
+    tools: 
+      - icon: github
+        text: Github
+        href: https://github.com/e-kotov/agit-2025-spanishoddata
+    contents:
+      - text: "👋 Intro"
+        href: index.qmd
+      - software-setup.qmd
+      - text: "📽️ Slides"
+        href: slides-container.qmd
+      - 1-mobility-data.qmd
+      # - text: "Tutorial: Visualize Mobility Flows"
+      #   href: 2-mobility-flows.qmd
+
+authors:
+  - name: Egor Kotov
+    url: https://www.ekotov.pro/
+    orcid: 0000-0001-6690-5345
+    affiliations:
+      - ref: mpidr
+      - ref: upf
+
+
+affiliations:
+  - id: mpidr
+    name: Max Planck Institute for Demographic Research
+    city: Rostock
+    country: Germany
+    url: https://www.demogr.mpg.de/en
+  - id: upf
+    name: Universitat Pompeu Fabra
+    city: Barcelona
+    country: Spain
+    url: https://www.upf.edu/en/web/politiques/home
+
+
+
+format:
+  html:
+    link-external-icon: true
+    link-external-newwindow: true
+    link-external-filter: 'ekotov\.pro'
+    theme:
+      light: zephyr
+      dark: slate
+    css: styles.css
+    toc: true
+    toc-depth: 4
+    toc-expand: 4
+    toc-location: right
+    code-overflow: wrap
+    grid:
+      body-width: 800px
+    mermaid:
+      theme: neutral
+
+bibliography: references.bib
+bibliographystyle: apa
+
+editor: source
+
+editor_options:
+  markdown:
+    wrap: 72
+    canonical: true
+
+execute:
+  eval: false
+  freeze: false
+  warning: false
+  error: false

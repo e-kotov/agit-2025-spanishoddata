@@ -1,0 +1,587 @@
+---
+title: Analysing massive open human mobility data using [`{spanishoddata}`](https://ropenspain.github.io/spanishoddata){target="_blank"}, [`{duckdb}`](https://r.duckdb.org/){target="_blank"}, and **flowmaps**
+# title-slide-attributes:
+#   data-background-image: media/spain-folding-flows.gif
+#   data-background-size: cover
+#   data-background-opacity: "0.5"
+
+format: 
+  # Install plugin with quarto install extension grantmcdermott/quarto-revealjs-clean
+  clean-revealjs:
+    # mouse-wheel: true
+    menu:
+      side: left
+      width: narrow
+    slide-number: false
+    show-slide-number: print
+    pdf-separate-fragments: true
+    link-external-newwindow: true
+    # chalkboard: true
+    code-block-height: 700px
+    preview-links: false
+    self-contained: true
+    css: media/slides.css
+
+authors:
+  - name: Egor Kotov
+    url: https://www.ekotov.pro/
+    orcid: 0000-0001-6690-5345
+    affiliations:
+      - ref: mpidr
+      - ref: upf
+
+affiliations:
+  - id: mpidr
+    name: Max Planck Institute for Demographic Research
+    city: Rostock
+    country: Germany
+    url: https://www.demogr.mpg.de/en
+  - id: upf
+    name: Universitat Pompeu Fabra
+    city: Barcelona
+    country: Spain
+    url: https://www.upf.edu/en/web/politiques/home
+
+date: 2025-07-03
+bibliography: references.bib
+execute: 
+  cache: true
+  warning: false
+  error: false
+---
+
+
+
+# Contents
+
+::: {.incremental}
+- Spanish Open Mobility Big Data [@mitms_mobility_web]
+
+- [`{spanishoddata}`](https://ropenspain.github.io/spanishoddata){target="_blank"} R package to get the data [@r-spanishoddata]
+
+- Big data analysis with [`DuckDB`](https://duckdb.org/){target="_blank"} [@Raasveldt_DuckDB] and [`duckdb`](https://r.duckdb.org/) R package [@r-duckdb]
+
+- Flowmaps with [`{flowmapper}`](https://github.com/JohMast/flowmapper) [@r-flowmapper] and [`{flowmapblue}`](https://flowmapblue.github.io/flowmapblue.R/) [@r-flowmapblue]
+
+:::
+
+
+
+
+# Spanish Open Mobility Big Data
+
+## Spanish Open Mobility Big Data
+
+### ~ 5 years of daily hourly flows
+
+::::: columns
+:::: {.column width="85%"}
+
+```{=html}
+<video width="90%" height="50%" style="display: block; margin: 0 auto;"
+controls loop data-muted data-loop data-autoplay>
+<source src="media/mobility-data-slides/flowmapblue-standard-time.mp4" type="video/mp4">
+</video>
+```
+
+::::
+
+:::: {.column width="15%"}
+::: {style="font-size: 11pt;"}
+Data by @mitms_mobility_web
+
+Based on 13 million customers of Orange Spain, expanded to full population of Spain
+
+*Data interface*
+[![](media/mobility-data-slides/spanishoddata-logo.png){width=80%}](https://ropenspain.github.io/spanishoddata/){target="_blank"}
+
+:::
+::::
+
+
+:::::
+
+
+
+## Spanish Open Mobility Big Data
+
+### 3500+ zones across Spain and beyond
+
+::::: columns
+:::: {.column width="85%"}
+
+```{=html}
+<video width="90%" height="50%" style="display: block; margin: 0 auto;"
+controls loop data-muted data-loop data-autoplay>
+<source src="media/mobility-data-slides/spain-folding-flows.mp4" type="video/mp4">
+</video>
+```
+
+::::
+
+:::: {.column width="15%"}
+::: {style="font-size: 11pt;"}
+Data by @mitms_mobility_web
+
+Based on 13 million customers of Orange Spain, expanded to full population of Spain
+
+*Data interface*
+[![](media/mobility-data-slides/spanishoddata-logo.png){width=80%}](https://ropenspain.github.io/spanishoddata/){target="_blank"}
+
+:::
+::::
+
+
+:::::
+
+
+
+
+
+# Get the data with `{spanishoddata}`
+
+## Get the data
+
+### Download one by one?
+![](media/mobility-data-slides/mitms-down-manual.png){width=80%}
+
+
+## Get the data
+
+### Write your own XML parser?
+
+![](media/mobility-data-slides/mitms-down-xml.png){width=80%}
+
+
+
+## Get the data
+
+:::: {.columns}
+
+<!-- ::: {.column width="50%" .centered} -->
+::: {.column width="58%"}
+### Time consuming options
+![Download one by one?](media/mobility-data-slides/mitms-down-manual.png){width=70%}
+
+![Write your own XML parser?](media/mobility-data-slides/mitms-down-xml.png){width=70%}
+
+:::
+
+::: {.column width="42%"}
+
+
+::: {.incremental}
+- Custom code to download and import multiple days
+- Variable names in Spanish
+- No gurantee of consistent variable types
+- Limited by available memory
+- Slow data processing (raw csv data)
+:::
+
+:::
+:::
+
+::::
+
+
+## Get the data {auto-animate="true"}
+
+:::: {.columns}
+
+<!-- ::: {.column width="50%" .centered} -->
+::: {.column width="58%"}
+### Time consuming options
+![Download one by one?](media/mobility-data-slides/mitms-down-manual.png){width=70%}
+
+![Write your own XML parser?](media/mobility-data-slides/mitms-down-xml.png){width=70%}
+
+:::
+
+::: {.column width="42%" data-id="code1"}
+
+
+### The fastest way
+
+Use [`{spanishoddata}`](https://ropenspain.github.io/spanishoddata){target="_blank"} package
+```{.r data-id="code2"}
+library(spanishoddata)
+spod_set_data_dir("data")
+
+od_data <- spod_get(
+  type = "origin-destination",
+  zones = "districts",
+  dates = c(
+    start = "2022-03-01",
+    end = "2022-03-07"
+  )
+)
+```
+
+:::
+
+::::
+
+
+
+## Get the data {auto-animate="true"}
+
+:::: {.columns data-id="code1"}
+
+<!-- ::: {.column width="50%" .centered} -->
+::: {.column width="42%"}
+
+### The fastest way
+
+Use [`{spanishoddata}`](https://ropenspain.github.io/spanishoddata){target="_blank"} package
+```{.r data-id="code2"}
+library(spanishoddata)
+spod_set_data_dir("data")
+
+od_data <- spod_get(
+  type = "origin-destination",
+  zones = "districts",
+  dates = c(
+    start = "2022-01-01",
+    end = "2022-01-04"
+  )
+)
+
+```
+
+:::
+::: {.column width="58%"}
+
+::: {.fragment}
+```{.r}
+library(dplyr)
+glimpse(od_data)
+
+Rows: ??
+Columns: 20          
+Database: DuckDB v1.2.1 [root@Darwin 24.4.0:R 4.5.0/:memory:]
+$ date                        <date> 2022-01-04, 2022-01-04, 2…
+$ hour                        <int> 0, 0, 0, 1, 1, 3, 4, 4, 5,…
+$ id_origin                   <fct> 01001, 01001, 01001, 01001…
+$ id_destination              <fct> 01009_AM, 01009_AM, 01009_…
+$ distance                    <fct> 2-10, 2-10, 2-10, 2-10, 2-…
+$ activity_origin             <fct> home, frequent_activity, w…
+$ activity_destination        <fct> frequent_activity, home, h…
+$ study_possible_origin       <lgl> FALSE, FALSE, FALSE, FALSE…
+$ study_possible_destination  <lgl> FALSE, FALSE, FALSE, FALSE…
+$ residence_province_ine_code <fct> 01, 01, 01, 01, 01, 01, 01…
+$ residence_province_name     <fct> "Araba/Álava", "Araba/Álav…
+$ income                      <fct> 10-15, >15, >15, >15, >15,…
+$ age                         <fct> NA, NA, NA, NA, NA, NA, NA…
+$ sex                         <fct> NA, NA, NA, NA, NA, NA, NA…
+$ n_trips                     <dbl> 4.894, 1.779, 1.094, 1.094…
+$ trips_total_length_km       <dbl> 27.966, 5.997, 4.081, 4.16…
+$ year                        <int> 2022, 2022, 2022, 2022, 20…
+$ month                       <int> 1, 1, 1, 1, 1, 1, 1, 1, 1,…
+$ day                         <int> 4, 4, 4, 4, 4, 4, 4, 4, 4,…
+```
+:::
+
+:::
+
+::::
+
+
+
+# Big Data on a Small Laptop {.centered}
+
+![](media/mobility-data-slides/big-data-small-laptop.png){width=80%}
+
+
+::: footer
+OpenAI. (2025). A digital image of stacked hard drives on a MacBook representing big data [AI-generated image]. Created using DALL·E. https://openai.com/dall-e
+:::
+
+## DuckDB in Action {auto-animate="true"}
+### Imagine a typical laptop
+
+:::: {.columns}
+
+::: {.column width="38%"}
+
+:::
+
+::: {.column width="62%"}
+```{=html}
+<video width="100%" style="display: block; margin: 0 auto;"
+data-muted>
+<source src="media/mobility-data-slides/duckdb-0-1.mp4" type="video/mp4">
+</video>
+```
+:::
+
+::::
+
+
+::: footer
+*Logos are the property of their respective owners.*
+
+*Only for illustration purposes. May not accurately represent actual GB usage and DuckDB operation.*
+:::
+
+
+
+## DuckDB in Action {auto-animate="true"}
+
+### Filter and summary
+
+
+:::: {.columns}
+
+
+::: {.column width="38%"}
+
+<!-- ```{.r data-id="code-duck" code-line-numbers="|4-7|8-10|11|"} -->
+```{.r data-id="code-duck"}
+library(dplyr)
+
+od_data |>
+  filter(
+    year == 2022,
+    month %in% c(2, 3, 4)
+    ) |>
+  summarise(
+    n_trips = mean(n_trips)
+  ) |>
+  collect()
+```
+
+:::
+
+::: {.column width="62%"}
+
+```{=html}
+<video width="100%" style="display: block; margin: 0 auto;"
+data-muted data-autoplay>
+<source src="media/mobility-data-slides/duckdb-0-1.mp4" type="video/mp4">
+</video>
+```
+
+:::
+
+::::
+
+
+::: footer
+*Logos are the property of their respective owners.*
+
+*Only for illustration purposes. May not accurately represent actual GB usage and DuckDB operation.*
+:::
+
+
+## DuckDB in Action
+
+### Summary on full data set
+
+
+:::: {.columns}
+
+
+::: {.column width="38%"}
+
+<!-- ```{.r data-id="code-duck" code-line-numbers="|4-6|7|"} -->
+```{.r data-id="code-duck"}
+library(dplyr)
+
+od_data |>
+  summarise(
+    n_trips = mean(n_trips)
+  ) |>
+  collect()
+```
+
+:::
+
+::: {.column width="62%"}
+
+```{=html}
+<video width="100%" style="display: block; margin: 0 auto;"
+data-muted data-autoplay>
+<source src="media/mobility-data-slides/duckdb-1-2.mp4" type="video/mp4">
+</video>
+```
+
+:::
+
+::::
+
+
+::: footer
+*Logos are the property of their respective owners.*
+
+*Only for illustration purposes. May not accurately represent actual GB usage and DuckDB operation.*
+:::
+
+
+## DuckDB in Action {auto-animate="true"}
+
+### Summary over multiple groups on full data set
+
+
+:::: {.columns}
+
+
+::: {.column width="38%"}
+
+<!-- ```{.r data-id="code-duck" code-line-numbers="|4-10|11-13|14|"} -->
+```{.r data-id="code-duck"}
+library(dplyr)
+
+od_data |>
+  group_by(
+    year,
+    month,
+    day,
+    id_origin,
+    id_destination
+  )
+  summarise(
+    n_trips = mean(n_trips)
+  ) |>
+  collect()
+```
+
+:::
+
+::: {.column width="62%"}
+
+```{=html}
+<video width="100%" style="display: block; margin: 0 auto;"
+data-muted data-autoplay>
+<source src="media/mobility-data-slides/duckdb-2-3.mp4" type="video/mp4">
+</video>
+```
+
+:::
+
+::::
+
+::: footer
+*Logos are the property of their respective owners.*
+
+*Only for illustration purposes. May not accurately represent actual GB usage and DuckDB operation.*
+:::
+
+
+## DuckDB in Action
+
+### Summary over multiple groups on full data set
+
+
+:::: {.columns}
+
+
+::: {.column width="38%"}
+
+<!-- ```{.r data-id="code-duck" code-line-numbers="|4-10|11-13|14|"} -->
+```{.r data-id="code-duck"}
+library(dplyr)
+
+od_data |>
+  group_by(
+    year,
+    month,
+    day,
+    id_origin,
+    id_destination
+  )
+  summarise(
+    n_trips = mean(n_trips)
+  ) |>
+  collect()
+```
+
+:::
+
+::: {.column width="62%"}
+
+```{=html}
+<video width="100%" style="display: block; margin: 0 auto;"
+data-muted data-autoplay>
+<source src="media/mobility-data-slides/duckdb-3-4.mp4" type="video/mp4">
+</video>
+```
+
+:::
+
+::::
+
+::: footer
+*Logos are the property of their respective owners.*
+
+*Only for illustration purposes. May not accurately represent actual GB usage and DuckDB operation.*
+:::
+
+
+# Get in touch
+
+:::: {.columns style='display: flex !important; height: 90%;'}
+
+<!-- ::: {.column width="50%" style='display: flex; justify-content: center; align-items: center;'} -->
+::: {.column width="50%" class="centered"}
+
+![](https://www.ekotov.pro/images/headshot.jpg){class="rounded-headshot"}
+
+**Egor Kotov**
+
+
+<a class="link-dark me-1" href="https://linkedin.com/in/egorkotov" title="LinkedIn" target="_blank" rel="noopener">{{< fa brands linkedin >}}</a>
+<a class="link-dark me-1" href="https://github.com/e-kotov" title="github" target="_blank" rel="noopener">{{< fa brands github >}}</a>
+<a class="link-dark me-1" href="https://bsky.app/profile/ekotov.pro" title="Bluesky" target="_blank" rel="noopener">{{< iconify simple-icons bluesky >}}</a>
+<a class="link-dark me-1" href="https://datasci.social/@EgorKotov" title="Mastodon" target="_blank" rel="noopener">{{< fa brands mastodon >}}</a>
+<a class="link-dark me-1" href="https://orcid.org/0000-0001-6690-5345" title="orcid" target="_blank" rel="noopener">{{< ai orcid >}}</a>
+<a class="link-dark me-1" href="https://scholar.google.com/citations?user=lZ2AXMAAAAAJ&hl=en&oi=ao" title="Google Scholar" target="_blank" rel="noopener">{{< ai google-scholar >}}</a>
+<a class="link-dark me-1" href="https://www.researchgate.net/profile/Egor-Kotov" title="ResearchGate" target="_blank" rel="noopener">{{< ai researchgate >}}</a>
+
+:::
+
+::: {.column width="50%" class="centered"}
+
+[![ekotov.pro](media/template/https-ekotov-pro.svg){width=50%}](https://www.ekotov.pro/){target="_blank"}
+
+```{=html}
+<div class="hexBadges">
+  <!-- top-left -->
+  <a href="https://ropenspain.github.io/spanishoddata" target="_blank">
+    <img data-no-scaling class="r0 c1"
+         src="https://ropenspain.github.io/spanishoddata/logo.png"
+         alt="spanishoddata">
+  </a>
+
+  <!-- middle offset -->
+  <a href="https://www.ekotov.pro/rJavaEnv" target="_blank">
+    <img data-no-scaling class="r1 c1"
+         src="https://www.ekotov.pro/rJavaEnv/logo.png"
+         alt="rJavaEnv">
+  </a>
+
+  <!-- top-right -->
+  <a href="https://www.ekotov.pro/rdocdump" target="_blank">
+    <img data-no-scaling class="r0 c2"
+         src="https://www.ekotov.pro/rdocdump/logo.png"
+         alt="rdocdump">
+  </a>
+
+  <a href="https://www.ekotov.pro/software" class="r1 c2 more">more…</a>
+</div>
+```
+
+:::
+
+
+::::
+
+::: footer
+*Logos are the property of their respective owners.*
+:::
+
+
+
+# References {.scrollable}
+
+::: {#refs}
+:::

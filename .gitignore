@@ -1,0 +1,6 @@
+# Ignore Quarto output and metadata
+_site/
+.quarto/
+
+# Ignore docs folder
+docs/

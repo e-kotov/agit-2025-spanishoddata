@@ -1,0 +1,39 @@
+---
+title: "🛠️ Software setup"
+from: markdown+emoji
+code-annotations: hover
+number-sections: true
+---
+
+-----
+
+::: {.callout-important appearance="simple"}
+To follow the workshop, you should have the following software installed on your computer:
+
+- [`R`](https://cran.r-project.org/){target="_blank"} and [`RStudio`](https://posit.co/download/rstudio-desktop/){target="_blank"} or another IDE, such as [Positron](https://positron.posit.co/download.html){target="_blank"}. 
+
+Alternatively, you can use `RStudio` in the web browser by launching this Binder instance for free >> [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/e-kotov/agit-2025-spanishoddata-playground/HEAD?urlpath=rstudio), limited by 1-2 GB of RAM and 1 CPU core. Source repository is at [https://github.com/e-kotov/agit-2025-spanishoddata-playground](https://github.com/e-kotov/spanishoddata-playground){target="_blank"}.
+
+:::
+
+# R packages to install
+
+Please install the following R packages with the code below:
+
+```{r}
+packages <- c(
+  "spanishoddata",
+  "flowmapper",
+  "flowmapblue",
+  "tidyverse",
+  "mapview",
+  "leafgl",
+  "patchwork",
+  "sf",
+  "basemaps",
+  "ggnewscale"
+)
+
+install.packages(packages)
+rm(packages)
+```
