@@ -1,0 +1,150 @@
+[
+  {
+    "objectID": "slides-container.html",
+    "href": "slides-container.html",
+    "title": "📽️ Slides",
+    "section": "",
+    "text": "Click on the slide and press F key to go fullscreen or open the slides in new tab.",
+    "crumbs": [
+      "📽️ Slides"
+    ]
+  },
+  {
+    "objectID": "markdown-setup.html",
+    "href": "markdown-setup.html",
+    "title": "Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps",
+    "section": "",
+    "text": "install quarto extensions\nquarto install extension grantmcdermott/quarto-revealjs-clean\nquarto add mcanouil/quarto-iconify"
+  },
+  {
+    "objectID": "software-setup.html",
+    "href": "software-setup.html",
+    "title": "🛠️ Software setup",
+    "section": "",
+    "text": "To follow the workshop, you should have the following software installed on your computer:\n\nR and RStudio or another IDE, such as Positron.\n\nAlternatively, you can use RStudio in the web browser by launching this Binder instance for free &gt;&gt; , limited by 1-2 GB of RAM and 1 CPU core. Source repository is at https://github.com/e-kotov/agit-2025-spanishoddata-playground.\n\n\n\n\n1 R packages to install\nPlease install the following R packages with the code below:\n\npackages &lt;- c(\n  \"spanishoddata\",\n  \"flowmapper\",\n  \"flowmapblue\",\n  \"tidyverse\",\n  \"mapview\",\n  \"leafgl\",\n  \"patchwork\",\n  \"sf\",\n  \"basemaps\",\n  \"ggnewscale\"\n)\n\ninstall.packages(packages)\nrm(packages)",
+    "crumbs": [
+      "🛠️ Software setup"
+    ]
+  },
+  {
+    "objectID": "slides.html#spanish-open-mobility-big-data-1",
+    "href": "slides.html#spanish-open-mobility-big-data-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Spanish Open Mobility Big Data",
+    "text": "Spanish Open Mobility Big Data\n~ 5 years of daily hourly flows\n\n\n\n\n\n\n\nData by Ministerio de Transportes y Movilidad Sostenible (MITMS) (2024)\nBased on 13 million customers of Orange Spain, expanded to full population of Spain\nData interface"
+  },
+  {
+    "objectID": "slides.html#spanish-open-mobility-big-data-2",
+    "href": "slides.html#spanish-open-mobility-big-data-2",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Spanish Open Mobility Big Data",
+    "text": "Spanish Open Mobility Big Data\n3500+ zones across Spain and beyond\n\n\n\n\n\n\n\nData by Ministerio de Transportes y Movilidad Sostenible (MITMS) (2024)\nBased on 13 million customers of Orange Spain, expanded to full population of Spain\nData interface"
+  },
+  {
+    "objectID": "slides.html#get-the-data",
+    "href": "slides.html#get-the-data",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Get the data",
+    "text": "Get the data\nDownload one by one?"
+  },
+  {
+    "objectID": "slides.html#get-the-data-1",
+    "href": "slides.html#get-the-data-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Get the data",
+    "text": "Get the data\nWrite your own XML parser?"
+  },
+  {
+    "objectID": "slides.html#get-the-data-2",
+    "href": "slides.html#get-the-data-2",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Get the data",
+    "text": "Get the data\n\n\nTime consuming options\n\n\n\nDownload one by one?\n\n\n\n\n\nWrite your own XML parser?\n\n\n\n\nCustom code to download and import multiple days\nVariable names in Spanish\nNo gurantee of consistent variable types\nLimited by available memory\nSlow data processing (raw csv data)\n\n\n::::"
+  },
+  {
+    "objectID": "slides.html#get-the-data-3",
+    "href": "slides.html#get-the-data-3",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Get the data",
+    "text": "Get the data\n\n\nTime consuming options\n\n\n\nDownload one by one?\n\n\n\n\n\nWrite your own XML parser?\n\n\n\nThe fastest way\nUse {spanishoddata} package\nlibrary(spanishoddata)\nspod_set_data_dir(\"data\")\n\nod_data &lt;- spod_get(\n  type = \"origin-destination\",\n  zones = \"districts\",\n  dates = c(\n    start = \"2022-03-01\",\n    end = \"2022-03-07\"\n  )\n)"
+  },
+  {
+    "objectID": "slides.html#get-the-data-4",
+    "href": "slides.html#get-the-data-4",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Get the data",
+    "text": "Get the data\n\n\nThe fastest way\nUse {spanishoddata} package\nlibrary(spanishoddata)\nspod_set_data_dir(\"data\")\n\nod_data &lt;- spod_get(\n  type = \"origin-destination\",\n  zones = \"districts\",\n  dates = c(\n    start = \"2022-01-01\",\n    end = \"2022-01-04\"\n  )\n)\n\n\nlibrary(dplyr)\nglimpse(od_data)\n\nRows: ??\nColumns: 20          \nDatabase: DuckDB v1.2.1 [root@Darwin 24.4.0:R 4.5.0/:memory:]\n$ date                        &lt;date&gt; 2022-01-04, 2022-01-04, 2…\n$ hour                        &lt;int&gt; 0, 0, 0, 1, 1, 3, 4, 4, 5,…\n$ id_origin                   &lt;fct&gt; 01001, 01001, 01001, 01001…\n$ id_destination              &lt;fct&gt; 01009_AM, 01009_AM, 01009_…\n$ distance                    &lt;fct&gt; 2-10, 2-10, 2-10, 2-10, 2-…\n$ activity_origin             &lt;fct&gt; home, frequent_activity, w…\n$ activity_destination        &lt;fct&gt; frequent_activity, home, h…\n$ study_possible_origin       &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE…\n$ study_possible_destination  &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE…\n$ residence_province_ine_code &lt;fct&gt; 01, 01, 01, 01, 01, 01, 01…\n$ residence_province_name     &lt;fct&gt; \"Araba/Álava\", \"Araba/Álav…\n$ income                      &lt;fct&gt; 10-15, &gt;15, &gt;15, &gt;15, &gt;15,…\n$ age                         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA…\n$ sex                         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA…\n$ n_trips                     &lt;dbl&gt; 4.894, 1.779, 1.094, 1.094…\n$ trips_total_length_km       &lt;dbl&gt; 27.966, 5.997, 4.081, 4.16…\n$ year                        &lt;int&gt; 2022, 2022, 2022, 2022, 20…\n$ month                       &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1,…\n$ day                         &lt;int&gt; 4, 4, 4, 4, 4, 4, 4, 4, 4,…"
+  },
+  {
+    "objectID": "slides.html#duckdb-in-action",
+    "href": "slides.html#duckdb-in-action",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "DuckDB in Action",
+    "text": "DuckDB in Action\nImagine a typical laptop\n\n\n\n\n\n\n\n\n\nLogos are the property of their respective owners.\nOnly for illustration purposes. May not accurately represent actual GB usage and DuckDB operation."
+  },
+  {
+    "objectID": "slides.html#duckdb-in-action-1",
+    "href": "slides.html#duckdb-in-action-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "DuckDB in Action",
+    "text": "DuckDB in Action\nFilter and summary\n\n\n\nlibrary(dplyr)\n\nod_data |&gt;\n  filter(\n    year == 2022,\n    month %in% c(2, 3, 4)\n    ) |&gt;\n  summarise(\n    n_trips = mean(n_trips)\n  ) |&gt;\n  collect()\n\n\n\n\n\n\nLogos are the property of their respective owners.\nOnly for illustration purposes. May not accurately represent actual GB usage and DuckDB operation."
+  },
+  {
+    "objectID": "slides.html#duckdb-in-action-2",
+    "href": "slides.html#duckdb-in-action-2",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "DuckDB in Action",
+    "text": "DuckDB in Action\nSummary on full data set\n\n\n\nlibrary(dplyr)\n\nod_data |&gt;\n  summarise(\n    n_trips = mean(n_trips)\n  ) |&gt;\n  collect()\n\n\n\n\n\n\nLogos are the property of their respective owners.\nOnly for illustration purposes. May not accurately represent actual GB usage and DuckDB operation."
+  },
+  {
+    "objectID": "slides.html#duckdb-in-action-3",
+    "href": "slides.html#duckdb-in-action-3",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "DuckDB in Action",
+    "text": "DuckDB in Action\nSummary over multiple groups on full data set\n\n\n\nlibrary(dplyr)\n\nod_data |&gt;\n  group_by(\n    year,\n    month,\n    day,\n    id_origin,\n    id_destination\n  )\n  summarise(\n    n_trips = mean(n_trips)\n  ) |&gt;\n  collect()\n\n\n\n\n\n\nLogos are the property of their respective owners.\nOnly for illustration purposes. May not accurately represent actual GB usage and DuckDB operation."
+  },
+  {
+    "objectID": "slides.html#duckdb-in-action-4",
+    "href": "slides.html#duckdb-in-action-4",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "DuckDB in Action",
+    "text": "DuckDB in Action\nSummary over multiple groups on full data set\n\n\n\nlibrary(dplyr)\n\nod_data |&gt;\n  group_by(\n    year,\n    month,\n    day,\n    id_origin,\n    id_destination\n  )\n  summarise(\n    n_trips = mean(n_trips)\n  ) |&gt;\n  collect()\n\n\n\n\n\n\nLogos are the property of their respective owners.\nOnly for illustration purposes. May not accurately represent actual GB usage and DuckDB operation."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "👋 Workshop Introduction",
+    "section": "",
+    "text": "This website provides supporting materials for the workshop Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps which is part of the AGIT 2025 conference held in Salzburg, Austria on July 1-3, 2025. This tutorial is licensed under CC0.\nLarge-scale human mobility datasets provide unprecedented opportunities to analyze and gain insights into movement patterns. Such insights are critical for fields ranging from transport planning and epidemiology to socio-spatial inequality research and climate-change mitigation. Until recently, access to human mobility data was a privilege of a few researchers. Thanks to countries like Spain that pioneered to make high-resolution aggregated human mobility data open, such data is becoming increasingly accessible. Thanks to the Multi-MNO project by Eurostat, similar mobility data may soon be widely available as part of official statistics across the European Union. However, the complexity and sheer volume of this data present practical challenges related to data acquisition, efficient processing, geographic disaggregation, network representation, and interactive visualization.\nThe workshop addresses these challenges by showcasing end-to-end workflows that harness newly developed and state-of-the-art R packages and methods. Participants will learn how to acquire and manage multi-gigabyte mobility datasets with {spanishoddata} and duckdb R packages, combine and compare the mobility flows across space and time by creating informative aggregate mobility flows visualizations using {flowmapper} and {flowmapblue} R packages.\n\n  \n    \n  \n    \n    Hourly daily mobility flows for almost 5 full years\n  \n\nSpanish open mobility data is used as a case study. This data contains anonymized and grouped flows between more than 3500 locations in Spain with hourly intervals across more than 3 full years. The flows are further split by age and income groups, sex, and activity type (home, work, regular, irregular) at both origin and destination, thereby presenting a universe of opportunities for analysis and research questions to explore.\n\n  \n    \n  \n      \n    Mobility flows covering all of Spain and beyond\n  \n\nWorkshop participants will use {spanishoddata} R package (Kotov, Lovelace, and Vidal-Tortosa 2024) to access open human mobilty flows (Ministerio de Transportes y Movilidad Sostenible (MITMS) 2024) derived from mobile phones in Spain. They will analyse the data using cutting edge {duckdb} (Mühleisen and Raasveldt 2024) and make static and interactive visualisations with {flowmapper} (Mast 2024), {flowmapblue} (Boyandin 2024).\nStay tuned for updates!\n\n\n\n\nReferences\n\nBoyandin, Ilya. 2024. Flowmap.blue Widget for r. https://doi.org/10.32614/CRAN.package.flowmapblue.\n\n\nKotov, Egor, Robin Lovelace, and Eugeni Vidal-Tortosa. 2024. Spanishoddata. https://doi.org/10.32614/CRAN.package.spanishoddata.\n\n\nMast, Johannes. 2024. Flowmapper: Draw Flows (Migration, Goods, Money, Information) on ’Ggplot2’ Plots. https://github.com/JohMast/flowmapper.\n\n\nMinisterio de Transportes y Movilidad Sostenible (MITMS). 2024. “Estudio de La Movilidad Con Big Data (Study of Mobility with Big Data).” https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data.\n\n\nMühleisen, Hannes, and Mark Raasveldt. 2024. Duckdb: DBI Package for the DuckDB Database Management System. https://doi.org/10.32614/CRAN.package.duckdb.",
+    "crumbs": [
+      "👋 Intro"
+    ]
+  },
+  {
+    "objectID": "1-mobility-data.html#get-the-zone-boundaries-data",
+    "href": "1-mobility-data.html#get-the-zone-boundaries-data",
+    "title": "📊 Tutorial: Get & Aggregate Mobility Data",
+    "section": "2.1 Get the zone boundaries data",
+    "text": "2.1 Get the zone boundaries data\n\nzones &lt;- spod_get_zones(zones = \"districts\", ver = 2)\n\n\nglimpse(zones)\n\nRows: 3,909\nColumns: 10\n$ id                   &lt;chr&gt; \"01001\", \"01002\", \"01004_AM\", \"01009_AM\", \"01010\", \"01017_AM\", \"01028_AM\", \"01…\n$ name                 &lt;chr&gt; \"Alegría-Dulantzi\", \"Amurrio\", \"Artziniega agregacion de municipios\", \"Asparre…\n$ population           &lt;dbl&gt; 2925, 10307, 3005, 4599, 2951, 4314, 7515, 18009, 3418, 3771, 5029, 2636, 4466…\n$ census_sections      &lt;chr&gt; \"0100101001; 0100101002\", \"0100201001; 0100201002; 0100201003; 0100201004; 010…\n$ census_districts     &lt;chr&gt; \"0100101\", \"0100201\", \"0100401; 0104201\", \"0100901; 0101301; 0102101; 0102701;…\n$ municipalities       &lt;chr&gt; \"01001\", \"01002\", \"01004; 01042\", \"01009; 01013; 01021; 01027; 01053; 01061\", …\n$ municipalities_mitma &lt;chr&gt; \"01001\", \"01002\", \"01004_AM\", \"01009_AM\", \"01010\", \"01017_AM\", \"01028_AM\", \"01…\n$ luas_mitma           &lt;chr&gt; \"01001\", \"01002\", \"01004_AM\", \"01009_AM\", \"01010\", \"01017_AM\", \"01028_AM\", \"01…\n$ district_ids_in_v1   &lt;chr&gt; \"01001_AM\", \"01002\", \"01010_AM\", \"01001_AM\", \"01010_AM\", \"01043_AM\", \"01031_AM…\n$ geometry             &lt;MULTIPOLYGON [m]&gt; MULTIPOLYGON (((538090.2 47..., MULTIPOLYGON (((501984.9 47..., M…\n\ngg_zones &lt;- zones |&gt;\n  st_simplify(dTolerance = 400) |&gt;\n  ggplot() +\n  geom_sf(linewidth = 0.2)\n\ngg_zones\n\n\n\n\nMITMS data zone boundaries",
+    "crumbs": [
+      "📊 Tutorial: Get & Aggregate Mobility Data"
+    ]
+  },
+  {
+    "objectID": "1-mobility-data.html#get-the-flows-data",
+    "href": "1-mobility-data.html#get-the-flows-data",
+    "title": "📊 Tutorial: Get & Aggregate Mobility Data",
+    "section": "2.2 Get the flows data",
+    "text": "2.2 Get the flows data\n\n2.2.1 Define the dates\nLet us get a few days of data. We will investigate the days when the city of Valencia was flooded.\nWe can get all dates that are available in the data:\n\navailable_dates &lt;- spod_get_valid_dates(ver = 2)\n\nAnd check if the dates of interest exist in the available data range:\n\ndates &lt;- seq(ymd(\"2024-10-27\"), ymd(\"2024-11-02\"), by = \"day\")\nall(dates %in% available_dates)\n\nTRUE\nWe can also check if the data is available for the weeks before and after the flood:\n\ndates &lt;- seq(ymd(\"2024-10-20\"), ymd(\"2024-11-09\"), by = \"day\")\nall(dates %in% available_dates)\n\nFALSE\nOne date is missing:\n\ndates[which(!dates %in% available_dates)]\n\n\"2024-11-09\"\n\n\n\n\n\n\nWarning\n\n\n\nDue to mobile network outages, the data on certain dates is missing. Kindly keep this in mind when calculating mean monthly or weekly flows.\nPlease check the original data page for currently known missing dates. You can use spod_get_valid_dates() function to get all available dates as shown above.\n\n\nBut that is fine, we still have the data for several days before and after.\n\n\n2.2.2 Define the type of data and spatial scale\nThe Spanish mobility data (Ministerio de Transportes y Movilidad Sostenible (MITMS) 2024) contains several different datasets with different spatial scales and types of data, such as overnight stays, resident population counts and more. We will focus on origin-destination flows data for the most detailed spatial resolution.\nLet us get the origin-destination flows for:\n\na day on the week before the flood\na day immidiately after the flood\na day of the week following the flood\na day one month after the flood\n\n\ndates &lt;- c(\"2024-10-23\", \"2024-10-30\", \"2024-11-06\", \"2024-11-27\")\nall(dates %in% available_dates)\n\nTRUE\nThe code below will download the requested dates and create the flows table.\n\nflows &lt;- spod_get(\n  type = \"origin-destination\",\n  zones = \"districts\",\n  dates = dates\n)\n\n\n\n\n\n\n\nTip\n\n\n\nFor the 4 requested dates, the spod_get() call above will download just under 1 GB of data. If you need to download more days, you will have to set the max_download_size_gb argument in spod_get(). This is a precaution against downloading too much data at once.\n\n\nYou can now print the table to preview it:\n\nflows\n\n# Source:   table&lt;od_csv_clean_filtered&gt; [?? x 20]\n# Database: DuckDB v1.2.1 [root@Darwin 24.4.0:R 4.5.0/:memory:]\n   date        hour id_origin id_destination distance activity_origin   activity_destination\n   &lt;date&gt;     &lt;int&gt; &lt;fct&gt;     &lt;fct&gt;          &lt;fct&gt;    &lt;fct&gt;             &lt;fct&gt;               \n 1 2024-11-27    13 01001     01001          0.5-2    frequent_activity home                \n 2 2024-11-27    17 01001     01001          0.5-2    frequent_activity home                \n 3 2024-11-27    14 01002     01001          10-50    frequent_activity home                \n 4 2024-11-27     1 01009_AM  01001          10-50    frequent_activity home                \n 5 2024-11-27     6 01009_AM  01001          10-50    frequent_activity home                \n 6 2024-11-27     8 01009_AM  01001          10-50    frequent_activity home                \n 7 2024-11-27    11 01009_AM  01001          10-50    frequent_activity home                \n 8 2024-11-27    17 01009_AM  01001          10-50    frequent_activity home                \n 9 2024-11-27    18 01009_AM  01001          10-50    frequent_activity home                \n10 2024-11-27    19 01009_AM  01001          10-50    frequent_activity home                \n# ℹ more rows\n# ℹ 13 more variables: study_possible_origin &lt;lgl&gt;, study_possible_destination &lt;lgl&gt;,\n#   residence_province_ine_code &lt;fct&gt;, residence_province_name &lt;fct&gt;, income &lt;fct&gt;, age &lt;fct&gt;, sex &lt;fct&gt;,\n#   n_trips &lt;dbl&gt;, trips_total_length_km &lt;dbl&gt;, year &lt;int&gt;, month &lt;int&gt;, day &lt;int&gt;, time_slot &lt;int&gt;\n# ℹ Use `print(n = ...)` to see more rows\nOr use glimpse() to view its structure:\n\nglimpse(flows)\n\n\n\n\n\n\n\nTip\n\n\n\nstr() and summary() will not work on this data in a way that you might expect, as it is not an ordinary data.frame, but a special tbl_* table object that is actually powered by DuckDB via {duckdb} R package in the background, but pretends to be a tibble (from {tibble}/{dplyr}/{tidyverse}).\n\nclass(flows)\n\n[1] \"tbl_duckdb_connection\" \"tbl_dbi\"               \"tbl_sql\"              \n[4] \"tbl_lazy\"              \"tbl\"   \n\n\nRows: ??\nColumns: 20          \nDatabase: DuckDB v1.2.1 [root@Darwin 24.4.0:R 4.5.0/:memory:]\n$ date                        &lt;date&gt; 2024-11-27, 2024-11-27, 2024-11-27, 2024-11-27, 2024-11-27, 2024-11-27…\n$ hour                        &lt;int&gt; 13, 17, 14, 1, 6, 8, 11, 17, 18, 19, 22, 23, 14, 15, 19, 10, 12, 14, 19…\n$ id_origin                   &lt;fct&gt; 01001, 01001, 01002, 01009_AM, 01009_AM, 01009_AM, 01009_AM, 01009_AM, …\n$ id_destination              &lt;fct&gt; 01001, 01001, 01001, 01001, 01001, 01001, 01001, 01001, 01001, 01001, 0…\n$ distance                    &lt;fct&gt; 0.5-2, 0.5-2, 10-50, 10-50, 10-50, 10-50, 10-50, 10-50, 10-50, 10-50, 1…\n$ activity_origin             &lt;fct&gt; frequent_activity, frequent_activity, frequent_activity, frequent_activ…\n$ activity_destination        &lt;fct&gt; home, home, home, home, home, home, home, home, home, home, home, home,…\n$ study_possible_origin       &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F…\n$ study_possible_destination  &lt;lgl&gt; FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, F…\n$ residence_province_ine_code &lt;fct&gt; 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01, 01,…\n$ residence_province_name     &lt;fct&gt; \"Araba/Álava\", \"Araba/Álava\", \"Araba/Álava\", \"Araba/Álava\", \"Araba/Álav…\n$ income                      &lt;fct&gt; 10-15, 10-15, 10-15, 10-15, 10-15, 10-15, 10-15, 10-15, 10-15, 10-15, 1…\n$ age                         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…\n$ sex                         &lt;fct&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…\n$ n_trips                     &lt;dbl&gt; 2.465, 2.465, 4.755, 4.755, 2.390, 4.755, 2.390, 2.465, 7.145, 4.755, 2…\n$ trips_total_length_km       &lt;dbl&gt; 4.678, 4.678, 218.331, 51.022, 29.603, 51.022, 34.586, 30.861, 106.426,…\n$ year                        &lt;int&gt; 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024, 2024,…\n$ month                       &lt;int&gt; 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11, 11,…\n$ day                         &lt;int&gt; 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27, 27,…\n$ time_slot                   &lt;int&gt; 13, 17, 14, 1, 6, 8, 11, 17, 18, 19, 22, 23, 14, 15, 19, 10, 12, 14, 19…\n\n\n\n\n\n\nTip\n\n\n\nThe meaning of all the variables is explained in the codebook.",
+    "crumbs": [
+      "📊 Tutorial: Get & Aggregate Mobility Data"
+    ]
+  },
+  {
+    "objectID": "license.html",
+    "href": "license.html",
+    "title": "License",
+    "section": "",
+    "text": "Creative Commons Legal Code\nCC0 1.0 Universal\nCREATIVE COMMONS CORPORATION IS NOT A LAW FIRM AND DOES NOT PROVIDE\nLEGAL SERVICES. DISTRIBUTION OF THIS DOCUMENT DOES NOT CREATE AN\nATTORNEY-CLIENT RELATIONSHIP. CREATIVE COMMONS PROVIDES THIS\nINFORMATION ON AN \"AS-IS\" BASIS. CREATIVE COMMONS MAKES NO WARRANTIES\nREGARDING THE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS\nPROVIDED HEREUNDER, AND DISCLAIMS LIABILITY FOR DAMAGES RESULTING FROM\nTHE USE OF THIS DOCUMENT OR THE INFORMATION OR WORKS PROVIDED\nHEREUNDER.\nStatement of Purpose\nThe laws of most jurisdictions throughout the world automatically confer exclusive Copyright and Related Rights (defined below) upon the creator and subsequent owner(s) (each and all, an “owner”) of an original work of authorship and/or a database (each, a “Work”).\nCertain owners wish to permanently relinquish those rights to a Work for the purpose of contributing to a commons of creative, cultural and scientific works (“Commons”) that the public can reliably and without fear of later claims of infringement build upon, modify, incorporate in other works, reuse and redistribute as freely as possible in any form whatsoever and for any purposes, including without limitation commercial purposes. These owners may contribute to the Commons to promote the ideal of a free culture and the further production of creative, cultural and scientific works, or to gain reputation or greater distribution for their Work in part through the use and efforts of others.\nFor these and/or other purposes and motivations, and without any expectation of additional consideration or compensation, the person associating CC0 with a Work (the “Affirmer”), to the extent that he or she is an owner of Copyright and Related Rights in the Work, voluntarily elects to apply CC0 to the Work and publicly distribute the Work under its terms, with knowledge of his or her Copyright and Related Rights in the Work and the meaning and intended legal effect of CC0 on those rights.\n\nCopyright and Related Rights. A Work made available under CC0 may be protected by copyright and related or neighboring rights (“Copyright and Related Rights”). Copyright and Related Rights include, but are not limited to, the following:\n\n\nthe right to reproduce, adapt, distribute, perform, display, communicate, and translate a Work;\nmoral rights retained by the original author(s) and/or performer(s);\npublicity and privacy rights pertaining to a person’s image or likeness depicted in a Work;\nrights protecting against unfair competition in regards to a Work, subject to the limitations in paragraph 4(a), below;\nrights protecting the extraction, dissemination, use and reuse of data in a Work;\ndatabase rights (such as those arising under Directive 96/9/EC of the European Parliament and of the Council of 11 March 1996 on the legal protection of databases, and under any national implementation thereof, including any amended or successor version of such directive); and\nother similar, equivalent or corresponding rights throughout the world based on applicable law or treaty, and any national implementations thereof.\n\n\nWaiver. To the greatest extent permitted by, but not in contravention of, applicable law, Affirmer hereby overtly, fully, permanently, irrevocably and unconditionally waives, abandons, and surrenders all of Affirmer’s Copyright and Related Rights and associated claims and causes of action, whether now known or unknown (including existing as well as future claims and causes of action), in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the “Waiver”). Affirmer makes the Waiver for the benefit of each member of the public at large and to the detriment of Affirmer’s heirs and successors, fully intending that such Waiver shall not be subject to revocation, rescission, cancellation, termination, or any other legal or equitable action to disrupt the quiet enjoyment of the Work by the public as contemplated by Affirmer’s express Statement of Purpose.\nPublic License Fallback. Should any part of the Waiver for any reason be judged legally invalid or ineffective under applicable law, then the Waiver shall be preserved to the maximum extent permitted taking into account Affirmer’s express Statement of Purpose. In addition, to the extent the Waiver is so judged Affirmer hereby grants to each affected person a royalty-free, non transferable, non sublicensable, non exclusive, irrevocable and unconditional license to exercise Affirmer’s Copyright and Related Rights in the Work (i) in all territories worldwide, (ii) for the maximum duration provided by applicable law or treaty (including future time extensions), (iii) in any current or future medium and for any number of copies, and (iv) for any purpose whatsoever, including without limitation commercial, advertising or promotional purposes (the “License”). The License shall be deemed effective as of the date CC0 was applied by Affirmer to the Work. Should any part of the License for any reason be judged legally invalid or ineffective under applicable law, such partial invalidity or ineffectiveness shall not invalidate the remainder of the License, and in such case Affirmer hereby affirms that he or she will not (i) exercise any of his or her remaining Copyright and Related Rights in the Work or (ii) assert any associated claims and causes of action with respect to the Work, in either case contrary to Affirmer’s express Statement of Purpose.\nLimitations and Disclaimers.\n\n\nNo trademark or patent rights held by Affirmer are waived, abandoned, surrendered, licensed or otherwise affected by this document.\nAffirmer offers the Work as-is and makes no representations or warranties of any kind concerning the Work, express, implied, statutory or otherwise, including without limitation warranties of title, merchantability, fitness for a particular purpose, non infringement, or the absence of latent or other defects, accuracy, or the present or absence of errors, whether or not discoverable, all to the greatest extent permissible under applicable law.\nAffirmer disclaims responsibility for clearing rights of other persons that may apply to the Work or any use thereof, including without limitation any person’s Copyright and Related Rights in the Work. Further, Affirmer disclaims responsibility for obtaining any necessary consents, permissions or other rights required for any use of the Work.\nAffirmer understands and acknowledges that Creative Commons is not a party to this document and has no duty or obligation with respect to this CC0 or use of the Work."
+  }
+]
