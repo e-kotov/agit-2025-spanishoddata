@@ -69,6 +69,8 @@ format:
     link-external-icon: true
     link-external-newwindow: true
     link-external-filter: 'ekotov\.pro'
+    include-in-header:
+      file: media/analytics.html
     theme:
       light: zephyr
       dark: slate
