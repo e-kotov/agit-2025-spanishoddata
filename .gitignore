@@ -1,6 +1,7 @@
 # Ignore Quarto output and metadata
 _site/
-.quarto/
+/.quarto/
+
 
 # Ignore docs folder
 docs/
