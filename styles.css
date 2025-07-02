@@ -1,3 +1,10 @@
+/* reveal viewport and affiliation logos */
+.reveal-viewport {
+  background-image: url(template/mpidr-mpg-upf.png);
+  background-size: 12%;
+  background-repeat: no-repeat;
+  background-position: 97% 3%;
+}
 :root {
   --hex-width: 120px;
   --hex-height: 140px;
@@ -7,13 +14,6 @@
 }
 
 
-/* reveal viewport and affiliation logos */
-.reveal-viewport {
-  background-image: url(template/mpidr-mpg-upf.png);
-  background-size: 12%;
-  background-repeat: no-repeat;
-  background-position: 97% 3%;
-}
 
 /* Optional: a faint grey top-border *only* on slides with an attribution */
 .reveal .slides section .attribution {
@@ -138,4 +138,44 @@
     overflow: visible !important;
     max-height: none !important;
   }
+}
+
+
+/* fix image stretch/fill on mobile */
+/*──────────────────────────────────────────────────────────────────────────────
+  Portrait-mobile fix: whenever the device is in portrait (vertical), force
+  img.r-stretch to fill the container’s width and scale its height.
+  This overrides the inline “height:0; width:0” that appears briefly.
+ ──────────────────────────────────────────────────────────────────────────────*/
+@media (orientation: portrait) {
+  /* You can also optionally add a `max-width` threshold if you only want this
+     on small phones, e.g. “and (max-width: 600px)”. But “orientation: portrait”
+     alone is often enough to capture vertical mobile. */
+  img.r-stretch {
+    width: 100% !important;   /* full width of the slide container */
+    height: auto !important;  /* scale height to preserve aspect ratio */
+    max-width: 100% !important;  /* never allow overshoot */
+    max-height: none !important; /* remove any height cap */
+  }
+}
+
+
+/* PDF icon link */
+#pdf-icon-link {
+  position: absolute;
+  top: 1.5%;
+  right: 4.5%;
+  z-index: 9999;
+}
+
+#pdf-icon-link img {
+  width: 26px;
+  height: auto;
+  opacity: 0.85;
+  transition: opacity 0.3s ease;
+}
+
+#pdf-icon-link img:hover {
+  opacity: 1;
+  cursor: pointer;
 }

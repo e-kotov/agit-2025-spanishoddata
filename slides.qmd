@@ -55,6 +55,10 @@ execute:
 # Contents
 
 ::: {.incremental}
+- What we will do today?
+
+- What did we know about human mobility?
+
 - Spanish Open Mobility Big Data [@mitms_mobility_web]
 
 - [`{spanishoddata}`](https://ropenspain.github.io/spanishoddata){target="_blank"} R package to get the data [@r-spanishoddata]
@@ -65,7 +69,134 @@ execute:
 
 :::
 
+# What we will do today?
 
+## What we will do today?
+
+::: {.incremental}
+
+- explore data
+
+- discuss insights, idea and limitations
+
+- potentially co-author a workshop-report short paper (in less than 2 weeks, strict deadline) with some visualisations and insights
+:::
+
+# What do we know about human mobility?
+
+
+## Survey-based human mobility
+
+### European Labour Force Surveys
+
+![](media/mobility-data-slides/SP-nuts3.png)
+
+
+::: footer
+*Source: [https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey](https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey){target="_blank"} <br> Image source: [https://ec.europa.eu/eurostat/documents/345175/17780010/2021-NUTS-3-map-ES.pdf](https://ec.europa.eu/eurostat/documents/345175/17780010/2021-NUTS-3-map-ES.pdf)*
+:::
+
+## Survey-based human mobility
+
+### German Mobility Survey
+
+![](media/mobility-data-slides/de-mobility-survey.png)
+
+
+::: footer
+*Source: [https://www.mobilitaet-in-deutschland.de/](https://www.mobilitaet-in-deutschland.de/){target="_blank"}*
+:::
+
+## Census-based human mobility
+
+### UK Census
+
+![](media/mobility-data-slides/uk-commuting1.jpg)
+
+
+::: footer
+*Source: [https://commute.datashine.org.uk/](https://commute.datashine.org.uk/){target="_blank"}*
+:::
+
+## Census-based human mobility
+
+### UK Census
+
+![](media/mobility-data-slides/uk-commuting2.jpg)
+
+
+::: footer
+*Source: [https://commute.datashine.org.uk/](https://commute.datashine.org.uk/){target="_blank"}*
+:::
+
+
+
+## Register-based human mobility
+
+### Netherlands Register Data
+
+![](media/mobility-data-slides/NL-commuting.png)
+
+
+::: footer
+*Source: [https://www.flowmap.blue/1Oe3zM219uSfJ3sjdRT90SAK2kU3xIvzdcCW6cwTsAuc](https://www.flowmap.blue/1Oe3zM219uSfJ3sjdRT90SAK2kU3xIvzdcCW6cwTsAuc){target="_blank"} <br> Data: [https://opendata.cbs.nl/#/CBS/nl/dataset/83628NED/table?dl=F076](https://opendata.cbs.nl/#/CBS/nl/dataset/83628NED/table?dl=F076){target="_blank"}*
+:::
+
+## IOT GPS Data
+
+### The Volkswagen leak
+
+![](media/mobility-data-slides/ccc-vw.png)
+
+
+::: footer
+*Source: [https://media.ccc.de/v/38c3-wir-wissen-wo-dein-auto-steht-volksdaten-von-volkswagen](https://media.ccc.de/v/38c3-wir-wissen-wo-dein-auto-steht-volksdaten-von-volkswagen){target="_blank"}*
+:::
+
+
+## Mobile Apps + Mobile Network GPS Data
+
+### App usage by Orange customers in France
+
+![](media/mobility-data-slides/netmob23.png)
+
+
+::: footer
+*Image source: @martnez-durive.mishra.ea2023*
+:::
+
+
+
+
+## Mobile phone data
+
+### Flowminder
+
+![](media/mobility-data-slides/flowminder1.png)
+
+
+Mobile phone data for humanitarian and development efforts in low- and middle-income countries
+
+::: footer
+
+*Source: [https://www.flowminder.org/what-we-do/population-distribution-and-mobility-analysis#data-applications](https://www.flowminder.org/what-we-do/population-distribution-and-mobility-analysis#data-applications){target="_blank"}*
+
+:::
+
+
+## Flowminder Software
+
+### FlowKit - privacy preserving mobile phone data aggregation
+
+![](media/mobility-data-slides/flowkit.png)
+
+
+
+::: footer
+
+*Learn more: [https://github.com/Flowminder/FlowKit](https://github.com/Flowminder/FlowKit){target="_blank"}, <br> [https://www.flowminder.org/what-we-do/mobile-data-partnerships/flowkit](https://www.flowminder.org/what-we-do/mobile-data-partnerships/flowkit){target="_blank"}*
+
+:::
 
 
 # Spanish Open Mobility Big Data
@@ -135,6 +266,262 @@ Based on 13 million customers of Orange Spain, expanded to full population of Sp
 :::::
 
 
+
+## Spanish Open Mobility Big Data
+
+![](media/mobility-data-slides/mitms-dash-1.png)
+
+
+::: footer
+*View the dashboard at [https://data.transportes.gob.es/public/mov-diaria-mensual](https://data.transportes.gob.es/public/mov-diaria-mensual){target="_blank"}*
+:::
+
+
+
+## Spanish Open Mobility Big Data
+
+![](media/mobility-data-slides/mitms-dash-2.png)
+
+
+::: footer
+*View the dashboard at [https://data.transportes.gob.es/public/mov-provincial](https://data.transportes.gob.es/public/mov-provincial){target="_blank"}*
+:::
+
+## Spanish Open Mobility Big Data
+
+![](media/mobility-data-slides/mitms-dash-3.png)
+
+
+::: footer
+*View the dashboard at [https://mapas-movilidad.transportes.gob.es/?date=2025-04-16T22](https://mapas-movilidad.transportes.gob.es/?date=2025-04-16T22%3A00%3A00.000Z&metric=JOURNEYS&distances=%5B%22D_05_2%22%2C%22D_2_10%22%2C%22D_10_50%22%2C%22D_50%22%5D&v=40.266184%2C-3.264749%2C7.75%2C0%2C25&ms=CARTO_WHITE&loc_type=MUNICIPALITIES&o_dis=%5B%5D&o_mun=%5B%5D&o_prov=%5B%5D&d_dis=%5B%5D&d_mun=%5B%5D&d_prov=%5B%5D){target="_blank"}*
+:::
+
+
+
+## Spanish Open Mobility Big Data
+
+### Academic research
+
+![](media/mobility-data-slides/article-topics.png)
+
+
+::: footer
+*Source: [https://github.com/e-kotov/spanishoddata-paper-supplement](https://github.com/e-kotov/spanishoddata-paper-supplement){target="_blank"} <br> [https://doi.org/10.5281/zenodo.15207374](https://doi.org/10.5281/zenodo.15207374){target="_blank"}*
+:::
+
+## Spanish Open Mobility Big Data
+
+### Effects of human mobility on dispersal of disease-transmitting mosquitoes
+
+
+::::: columns
+:::: {.column width="55%" class="centered"}
+
+![](media/mobility-data-slides/msq-mob-1.png){width=70%}
+
+::: {style="font-size: 11pt;"}
+*Uses Labour Force Survey data<br>[@lucati.delacour.ea2022]*
+:::
+
+::::
+
+:::: {.column width="45%" class="centered"}
+
+![](media/mobility-data-slides/msq-mob-2.png){width=80%}
+
+::: {style="font-size: 11pt;"}
+*Builds on previous research using mobile phone based data<br>[@kotov.bartumeus.ea2024]*
+:::
+
+::::
+:::::
+
+
+
+# Multi-MNO Project
+
+## Multi-MNO Project
+
+![](media/mobility-data-slides/multi-mno.png)
+
+
+::: footer
+*Source: [https://cros.ec.europa.eu/landing-page/multi-mno-project](https://cros.ec.europa.eu/landing-page/multi-mno-project){target="_blank"}*
+:::
+
+## Multi-MNO Project
+
+### Mobility data aggregation using unified methodology
+
+::::: columns
+:::: {.column width="80%"}
+
+![](media/mobility-data-slides/mmno-single-methodology.png)
+
+::::
+:::: {.column width="20%"}
+
+![](media/mobility-data-slides/tf-mno-position-paper.png
+::::
+
+:::::
+
+
+::: footer
+*Source: [https://cros.ec.europa.eu/system/files/2023-12/20231109_dimeitdg_mnoposition_paper_ricciato_ho%20%281%29.pdf](https://cros.ec.europa.eu/system/files/2023-12/20231109_dimeitdg_mnoposition_paper_ricciato_ho%20%281%29.pdf){target="_blank"} <br> Learn more: [https://ec.europa.eu/eurostat/web/products-statistical-reports/w/ks-ft-23-001](https://ec.europa.eu/eurostat/web/products-statistical-reports/w/ks-ft-23-001){target="_blank"}*
+:::
+
+
+
+## Multi-MNO Project
+
+### How it works
+
+![](media/mobility-data-slides/mmno-schema-1.png)
+
+
+
+::: footer
+*Source [https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf](https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf){target="_blank"}*
+:::
+
+
+## Multi-MNO Software
+
+### [https://github.com/eurostat/multimno](https://github.com/eurostat/multimno){target="_blank"}
+
+
+![](media/mobility-data-slides/mmno-schema-2.png)
+
+
+::: footer
+*Source [https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf](https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf){target="_blank"}*
+:::
+
+## Multi-MNO Outputs
+
+### What to expect?
+
+
+![](media/mobility-data-slides/mmno-outputs.png)
+
+
+::: footer
+*Source [https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf](https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf){target="_blank"}*
+:::
+
+
+
+# `spanishoddata` R package
+
+## `spanishoddata`
+
+### access Spanish Open Mobility Big Data from R
+
+![](media/mobility-data-slides/spod-bcn.png)
+
+
+::: footer
+*Source: [https://ropenspain.github.io/spanishoddata/articles/v1-2020-2021-mitma-data-codebook.html](https://ropenspain.github.io/spanishoddata/articles/v1-2020-2021-mitma-data-codebook.html){target="_blank"}* 
+:::
+
+## `spanishoddata` - access open human mobility data
+
+### A package with many companions
+
+:::: {.columns style='display: flex !important; height: 90%;'}
+
+<!-- ::: {.column width="50%" style='display: flex; justify-content: center; align-items: center;'} -->
+::: {.column width="60%" class="centered"}
+
+
+```{=html}
+<div class="hexBadges">
+  <!-- top-left -->
+  <a href="https://ropenspain.github.io/spanishoddata" target="_blank">
+    <img data-no-scaling class="r0 c1"
+         src="https://ropenspain.github.io/spanishoddata/logo.png"
+         alt="spanishoddata">
+  </a>
+
+  <!-- middle offset -->
+  <a href="https://flowmapblue.github.io/flowmapblue.R" target="_blank">
+    <img data-no-scaling class="r1 c1"
+         src="https://flowmapblue.github.io/flowmapblue.R/logo.svg"
+         alt="flowmapblue">
+  </a>
+
+  <!-- top-right -->
+  <a href="https://github.com/JohMast/flowmapper" target="_blank">
+    <img data-no-scaling class="r0 c2"
+         src="https://github.com/JohMast/flowmapper/blob/master/inst/figures/hex.png?raw=true"
+         alt="flowmapper">
+  </a>
+
+<a href="https://duckdb.org/" target="_blank">
+    <img data-no-scaling class="r2 c2"
+         src="https://duckdb.org/images/logo-dl/DuckDB_Logo-horizontal.svg"
+         alt="duckdb">
+  </a>
+
+
+</div>
+```
+
+:::
+
+::: {.column width="40%" class="centered"}
+
+### [Detailed documentation](https://ropenspain.github.io/spanishoddata/articles/flowmaps-interactive.html){target="_blank"}
+
+![](media/mobility-data-slides/spod-guide-1.png){width=100%}
+
+
+:::
+
+::::
+
+::: footer
+*Logos are the property of their respective owners.*
+:::
+
+
+## `spanishoddata` use cases
+
+### Split work and non-work trips
+
+```{=html}
+<video width="90%" height="70%" style="display: block; margin: 0 auto;"
+controls loop data-muted data-loop data-autoplay>
+<source src="media/mobility-data-slides/13-a-new-tool.mp4" type="video/mp4">
+</video>
+```
+
+::: footer
+*Source: [https://github.com/e-kotov/2024-30DayMapChallenge](https://github.com/e-kotov/2024-30DayMapChallenge){target="_blank"}*
+:::
+
+## `spanishoddata` use cases
+
+### Split into different trip types
+
+![](media/mobility-data-slides/fig-02-madrid-1.jpeg){width=100%}
+
+
+::: footer
+*Source: [https://github.com/e-kotov/spanishoddata-paper-supplement](https://github.com/e-kotov/spanishoddata-paper-supplement){target="_blank"}, [https://doi.org/10.5281/zenodo.15207374](https://doi.org/10.5281/zenodo.15207374){target="_blank"}*
+:::
+
+## `spanishoddata` use cases
+
+### Split into different trip types
+
+![](media/mobility-data-slides/fig-02-madrid-2.jpeg){width=100%}
+
+
+::: footer
+*Source: [https://github.com/e-kotov/spanishoddata-paper-supplement](https://github.com/e-kotov/spanishoddata-paper-supplement){target="_blank"}, [https://doi.org/10.5281/zenodo.15207374](https://doi.org/10.5281/zenodo.15207374){target="_blank"}*
+:::
 
 
 
@@ -516,6 +903,21 @@ data-muted data-autoplay>
 *Only for illustration purposes. May not accurately represent actual GB usage and DuckDB operation.*
 :::
 
+## Flowmaps with `{flowmapper}` and `{flowmapblue}`
+
+### [`{flowmapblue}`](https://flowmapblue.github.io/flowmapblue.R) [@r-flowmapblue] for interactive flowmaps
+
+### [`{flowmapper}`](https://github.com/JohMast/flowmapper) [@r-flowmapper] for static flowmaps and producing spatial data
+
+
+![](media/mobility-data-slides/NL-commuting.png)
+
+
+::: footer
+*Source: [https://www.flowmap.blue/1Oe3zM219uSfJ3sjdRT90SAK2kU3xIvzdcCW6cwTsAuc](https://www.flowmap.blue/1Oe3zM219uSfJ3sjdRT90SAK2kU3xIvzdcCW6cwTsAuc){target="_blank"} <br> Data: [https://opendata.cbs.nl/#/CBS/nl/dataset/83628NED/table?dl=F076](https://opendata.cbs.nl/#/CBS/nl/dataset/83628NED/table?dl=F076){target="_blank"}*
+:::
+
+
 
 # Get in touch
 
@@ -578,6 +980,11 @@ data-muted data-autoplay>
 ::: footer
 *Logos are the property of their respective owners.*
 :::
+
+## Tutorial website
+
+### [https://www.ekotov.pro/agit-2025-spanishoddata/](https://www.ekotov.pro/agit-2025-spanishoddata/)
+[![](media/mobility-data-slides/tutorial-qr-code.svg){width=40%}](https://www.ekotov.pro/agit-2025-spanishoddata/)
 
 
 
