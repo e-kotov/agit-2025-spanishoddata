@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this workshop materials or website, please cite it using the following metadata."
+type: lesson
+authors:
+- family-names: Egor
+  given-names: Kotov
+orcid: https://orcid.org/0000-0000-0000-0000
+title: "AGIT 2025 Workshop: Analysing Massive Open Human Mobility Data in R Using spanishoddata, duckdb and flowmaps"
+repository-code: https://github.com/e-kotov/agit-2025-spanishoddata
+url: https://www.ekotov.pro/agit-2025-spanishoddata/
+version: "0.9.0"
+date-released: 2025-07-03
+license: CCBY-4.0
