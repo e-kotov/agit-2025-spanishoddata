@@ -38,6 +38,7 @@ website:
       - text: "📽️ Slides"
         href: slides-container.qmd
       - 1-mobility-data.qmd
+      - 2-flowmapping.qmd
       # - text: "Tutorial: Visualize Mobility Flows"
       #   href: 2-mobility-flows.qmd
 

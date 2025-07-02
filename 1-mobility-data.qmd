@@ -350,3 +350,139 @@ dbGetQuery(con, glue("SELECT * FROM {table_name} LIMIT 5")) # simple example of 
 Many common data operations are supported, such as `{dplyr}`'s [`filter()`](https://dplyr.tidyverse.org/reference/filter.html), [`select()`](https://dplyr.tidyverse.org/reference/select.html), [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html), [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html), [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) and more, as well as [`{lubridate}`](https://lubridate.tidyverse.org/) data and time manipulation functions, and base R `sum()`, `mean()`, `median()`, etc.
 
 ## Aggregation examples
+
+### Count the total number of over all days
+
+```{r}
+flows |>
+  summarise(
+    n_trips = sum(n_trips, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  collect()
+```
+
+```r
+# A tibble: 1 × 1    
+     n_trips
+       <dbl>
+1 591212295.
+```
+
+### Count total number of trips per day
+
+```{r}
+flows |>
+  group_by(date) |>
+  summarise(
+    n_trips = sum(n_trips, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  collect()
+```
+
+
+```r
+# A tibble: 4 × 2    
+  date          n_trips
+  <date>          <dbl>
+1 2024-10-23 148427847.
+2 2024-11-27 148479109.
+3 2024-11-06 149441508.
+4 2024-10-30 144863831.
+```
+
+
+### Count total number of work trips in the morning hours by women vs men
+
+```{r}
+m_vs_f_morning_commute <- flows |>
+  filter(!is.na(sex), hour %in% 6:10) |>
+  group_by(date, sex) |>
+  summarise(
+    n_trips = sum(n_trips, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  arrange(date, sex) |>
+  collect()
+
+m_vs_f_morning_commute
+```
+
+```r
+# A tibble: 8 × 3
+  date       sex      n_trips
+  <date>     <fct>      <dbl>
+1 2024-10-23 female 11481768.
+2 2024-10-23 male   10736460.
+3 2024-10-30 female 11335501.
+4 2024-10-30 male   10596445.
+5 2024-11-06 female 11458701.
+6 2024-11-06 male   10719684.
+7 2024-11-27 female 11488244.
+8 2024-11-27 male   10740725.
+```
+
+
+Plot it
+
+```{r}
+m_vs_f_morning_commute_plot <- m_vs_f_morning_commute |>
+  ggplot(aes(x = date, y = n_trips, color = sex)) +
+  geom_line() +
+  theme_light() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+#| include: false
+ggsave(
+  m_vs_f_morning_commute_plot,
+  filename = "media/1-mobility-data/m-vs-f-morning-commute.png",
+  width = 5,
+  height = 5,
+  dpi = 200,
+  create.dir = TRUE
+)
+```
+
+![](media/1-mobility-data/m-vs-f-morning-commute.png)
+
+# Slow aggregation? Convert the data to analysis-ready format
+
+The aggregations above may take 30-60 seconds to complete. To make the analysis faster even on these few dates, convert the data to an analysis-ready format. By default it is DuckDB. All you need to do is to replace the `spod_get()` call with `spod_convert()` call, and then connect to the database with `spod_connect()`. The conversion for these few days we are working with will take just a minute or two.
+
+::: {.callout-tip}
+You can read more about the conversion and different formats in the [conversion vignette](https://ropenspain.github.io/spanishoddata/articles/convert.html). You can find the up to date speed test comparison of formats using mobility data in [https://github.com/e-kotov/spanishoddata-paper-supplement/blob/main/plots/supplement-plots/12_analysis-speed.pdf](https://github.com/e-kotov/spanishoddata-paper-supplement/blob/main/plots/supplement-plots/12_analysis-speed.pdf){target="_blank"}.
+:::
+
+```{r}
+flows_db_path <- spod_convert(
+  type = "origin-destination",
+  zones = "districts",
+  dates = dates
+)
+
+flows_db <- spod_connect(flows_db_path)
+```
+
+Now try the same aggregations as above, but on the `flows_db` object. They should be much faster now, alsmost instant.
+
+```{r}
+flows_db |>
+  summarise(
+    n_trips = sum(n_trips, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  collect()
+```
+
+```{r}
+flows_db |>
+  group_by(date) |>
+  summarise(
+    n_trips = sum(n_trips, na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  collect()
+```
