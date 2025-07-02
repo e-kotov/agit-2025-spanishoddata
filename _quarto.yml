@@ -12,15 +12,15 @@ website:
   open-graph:
     title: "Mobility Flows and Accessibility Using R and Big Open Data"
     image: media/card.png
-    image-alt: "Workshop on Mobility Flows and Accessibility Using R and Big Open Data, IC2S2 2025 conference, Norrköping, Sweden, July 21, 2025. Tutors: Egor Kotov & Johannes Mast"
-    description: "Workshop on Mobility Flows and Accessibility Using R and Big Open Data, IC2S2 2025 conference, Norrköping, Sweden, July 21, 2025. Tutors: Egor Kotov & Johannes Mast. This workshop will teach you how to use the R package spanishoddata to access open human mobility data and how to aggregate it with duckdb. We will also explore how to visualize mobility flows and accessibility using R package flowmapper and flowmapblue."
+    image-alt: "Workshop on Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps, AGIT 2025 conference, Salzburg, Austria, July 3, 2025. Tutors: Egor Kotov"
+    description: "Workshop on Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps, AGIT 2025 conference, Salzburg, Austria, July 3, 2025. Tutors: Egor Kotov. This workshop will teach you how to use the R package spanishoddata to access open human mobility data and how to aggregate it with duckdb. We will also explore how to visualize mobility flows using R package flowmapper and flowmapblue."
   page-navigation: true
   page-footer: 
       border: true
       left: "Author: Egor Kotov" 
       center:
-        - text: "CC0 1.0"
-          href: license.qmd
+        - text: "CCBY 4.0"
+          href: https://creativecommons.org/licenses/by/4.0/
       right: 
         - icon: github
           href: https://github.com/e-kotov/agit-2025-spanishoddata
@@ -70,7 +70,10 @@ format:
     link-external-newwindow: true
     link-external-filter: 'ekotov\.pro'
     include-in-header:
-      file: media/analytics.html
+      - text: |
+          <!-- tell Zotero this is a webpage via Dublin Core -->
+          <meta name="DC.Type" content="WebPage">
+      - file: media/analytics.html
     theme:
       light: zephyr
       dark: slate
@@ -87,6 +90,16 @@ format:
 
 bibliography: references.bib
 bibliographystyle: apa
+citation:
+  type: webpage
+  title: "AGIT 2025 Workshop: Analysing Massive Open Human Mobility Data in R Using spanishoddata, duckdb and flowmaps"
+  # url: https://www.ekotov.pro/agit-2025-spanishoddata/
+  # container-title: "AGIT 2025 Workshop: Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps"
+  issued: 2025-07-03
+  doi: 10.5281/zenodo.14914417
+doi: 10.5281/zenodo.14914417
+google-scholar: true
+
 
 editor: source
 

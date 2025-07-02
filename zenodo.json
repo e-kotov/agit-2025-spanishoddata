@@ -1,0 +1,40 @@
+{
+  "title": "Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps",
+  "upload_type": "lesson",
+  "publication_date": "2025-07-03",
+  "creators": [
+    {
+      "name": "Kotov, Egor",
+      "affiliation": "Max Planck Institute for Demographic Research; Universitat Pompeu Fabra",
+      "orcid": "0000-0001-6690-5345"
+    }
+  ],
+  "description": "Workshop on Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps, AGIT 2025 conference, Salzburg, Austria, July 3, 2025. Tutors: Egor Kotov. This record archives the workshop materials, including code, notebooks, and slides.",
+  "access_right": "open",
+  "license": "CC0-1.0",
+  "keywords": [
+    "mobility data",
+    "open data",
+    "spanishoddata",
+    "duckdb",
+    "flowmaps",
+    "R",
+    "computational notebook",
+    "workshop"
+  ],
+  "version": "1.0.0",
+  "related_identifiers": [
+    {
+      "scheme": "url",
+      "identifier": "https://www.ekotov.pro/agit-2025-spanishoddata/",
+      "relation": "compiles",
+      "resource_type": "publication-technicalnote"
+    },
+    {
+      "relation": "isNewVersionOf",
+      "resource_type": "publication-technicalnote"
+    }
+  ],
+  "language": "eng",
+  "repository_url": "https://github.com/e-kotov/agit-2025-spanishoddata"
+}
