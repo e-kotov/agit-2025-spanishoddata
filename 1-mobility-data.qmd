@@ -14,7 +14,11 @@ number-sections: true
 Before getting the data, make sure you have `{spanishoddata}` R package installed and loaded. We will also need `{tidyverse}` and `{sf}`.
 
 ```{r}
+#| eval: false
 install.packages(c("spanishoddata", "tidyverse", "sf"))
+```
+
+```{r}
 library(spanishoddata)
 library(tidyverse)
 library(sf)
@@ -181,6 +185,8 @@ all(dates %in% available_dates)
 TRUE
 ```
 
+### Get the data
+
 The code below will download the requested dates and create the `flows` table.
 
 ```{r}
@@ -191,8 +197,12 @@ flows <- spod_get(
 )
 ```
 
-::: {.callout-tip}
+::: {.callout-note}
 For the 4 requested dates, the `spod_get()` call above will download just under 1 GB of data. If you need to download more days, you will have to set the `max_download_size_gb` argument in `spod_get()`. This is a precaution against downloading too much data at once.
+:::
+
+::: {.callout-tip}
+`spod_download()` can be used with the same arguments to simply pre-download the data without setting it up as a table.
 :::
 
 You can now print the table to preview it:
@@ -273,3 +283,70 @@ $ time_slot                   <int> 13, 17, 14, 1, 6, 8, 11, 17, 18, 19, 22, 23,
 ::: {.callout-tip}
 The meaning of all the variables is explained in the [codebook](https://ropenspain.github.io/spanishoddata/articles/v2-2022-onwards-mitma-data-codebook.html#od-data).
 :::
+
+
+::: {.callout-tip}
+If for your analysis, only need total daily flows between municipalties without any extra information, you can save time by getting pre-aggregated reduced size data directly from the [interactive map hosted by the Ministry of Transport and Sustainable Mobility](https://mapas-movilidad.transportes.gob.es/). To do this, kindly refer to the ["Quicky get daily data" vignette](https://ropenspain.github.io/spanishoddata/articles/quick-get.html). However, this is not recommended for studies that require the code to be reproducible, as the API may change at any time. You can use this functionality for quick mobility estimates and in classroom for experiments.
+:::
+
+
+
+
+### Data verification
+
+When mobility data files are downloaded with `spod_get()` or `spod_download()`, they are automatically checked by file size against known size of the remote files to prevent currupted downloads and preserve data integrity. However, if you would like to do an extra check you can use `spod_check_files()` with the same arguments you used for `spod_get()` or `spod_download()`.
+
+
+```{r}
+file_check <- spod_check_files(
+  type = "origin-destination",
+  zones = "districts",
+  dates = dates
+)
+```
+
+```
+Data version detected from dates: 2
+Using existing disk cache: /path/to/your/working/dir/data/metadata_cache/metadata_s3_v2_2025-07-02.rds
+All checked files are consistent.
+```
+
+
+```{r}
+all(file_check$local_file_consistent)
+```
+
+```r
+TRUE
+```
+
+If the some files were corrupted, you could easily find out which ones with:
+
+```{r}
+file_check |>
+  filter(local_file_consistent == FALSE)
+```
+
+And you would be able to fix this by simply re-running the call to `spod_get()` or `spod_download()`.
+
+# Aggregate the data
+
+As noted before, the table you get from `spod_get()` is not an ordinary R `data.frame` or `tibble`. It is a database connection. As a result, you are actually supposed to query it using [SQL syntax of DuckDB](https://duckdb.org/docs/stable/sql/introduction.html#querying-a-table){target="_blank"}. However, thanks to the comprehensive ecosystem of R packages, for most operations, you can get away with using [`{dplyr}`](https://dplyr.tidyverse.org/) funtions and many other [`{tidyverse}`](https://tidyverse.tidyverse.org/) and base R tools, as if this was just a `data.frame` or `tibble` table.
+
+::: {.callout-warning}
+Not all analytical and data processing capabilities of `DuckDB` are available via base R and `tidyverse` functions, in some cases you will have to resort to `SQL` language. Large language models are of great help with that, do not hesistate to paste the description of the table from `glimpse(trips)` and your query into your favourite LLM to get the `SQL` query.
+
+You can send an [DuckDB SQL query](https://duckdb.org/docs/stable/sql/introduction.html#querying-a-table){target="_blank"} and get the result as shown below:
+```{r}
+con <- dbplyr::remote_con(flows) # get the underlying database connection
+table_name <- dbplyr::remote_name(flows) # get the table name
+library(duckdb)
+library(glue)
+dbGetQuery(con, glue("SELECT * FROM {table_name} LIMIT 5")) # simple example of SQL query, but can be any query supported by DuckDB
+```
+
+:::
+
+Many common data operations are supported, such as `{dplyr}`'s [`filter()`](https://dplyr.tidyverse.org/reference/filter.html), [`select()`](https://dplyr.tidyverse.org/reference/select.html), [`mutate()`](https://dplyr.tidyverse.org/reference/mutate.html), [`summarise()`](https://dplyr.tidyverse.org/reference/summarise.html), [`group_by()`](https://dplyr.tidyverse.org/reference/group_by.html) and more, as well as [`{lubridate}`](https://lubridate.tidyverse.org/) data and time manipulation functions, and base R `sum()`, `mean()`, `median()`, etc.
+
+## Aggregation examples
