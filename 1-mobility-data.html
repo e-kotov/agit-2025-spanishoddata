@@ -85,6 +85,7 @@ div.csl-indent {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<link href="./2-flowmapping.html" rel="next">
 <link href="./slides-container.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -399,6 +400,12 @@ div.csl-indent {
  <span class="menu-text">📊 Tutorial: Get &amp; Aggregate Mobility Data</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./2-flowmapping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">📈 Tutorial: Flowmaps</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -423,8 +430,14 @@ div.csl-indent {
   </ul></li>
   <li><a href="#aggregate-the-data" id="toc-aggregate-the-data" class="nav-link" data-scroll-target="#aggregate-the-data"><span class="header-section-number">3</span> Aggregate the data</a>
   <ul>
-  <li><a href="#aggregation-examples" id="toc-aggregation-examples" class="nav-link" data-scroll-target="#aggregation-examples"><span class="header-section-number">3.1</span> Aggregation examples</a></li>
+  <li><a href="#aggregation-examples" id="toc-aggregation-examples" class="nav-link" data-scroll-target="#aggregation-examples"><span class="header-section-number">3.1</span> Aggregation examples</a>
+  <ul class="collapse">
+  <li><a href="#count-the-total-number-of-over-all-days" id="toc-count-the-total-number-of-over-all-days" class="nav-link" data-scroll-target="#count-the-total-number-of-over-all-days"><span class="header-section-number">3.1.1</span> Count the total number of over all days</a></li>
+  <li><a href="#count-total-number-of-trips-per-day" id="toc-count-total-number-of-trips-per-day" class="nav-link" data-scroll-target="#count-total-number-of-trips-per-day"><span class="header-section-number">3.1.2</span> Count total number of trips per day</a></li>
+  <li><a href="#count-total-number-of-work-trips-in-the-morning-hours-by-women-vs-men" id="toc-count-total-number-of-work-trips-in-the-morning-hours-by-women-vs-men" class="nav-link" data-scroll-target="#count-total-number-of-work-trips-in-the-morning-hours-by-women-vs-men"><span class="header-section-number">3.1.3</span> Count total number of work trips in the morning hours by women vs men</a></li>
   </ul></li>
+  </ul></li>
+  <li><a href="#slow-aggregation-convert-the-data-to-analysis-ready-format" id="toc-slow-aggregation-convert-the-data-to-analysis-ready-format" class="nav-link" data-scroll-target="#slow-aggregation-convert-the-data-to-analysis-ready-format"><span class="header-section-number">4</span> Slow aggregation? Convert the data to analysis-ready format</a></li>
   </ul>
 </nav>
     </div>
@@ -820,14 +833,128 @@ Warning
 </div>
 <p>Many common data operations are supported, such as <code>{dplyr}</code>’s <a href="https://dplyr.tidyverse.org/reference/filter.html"><code>filter()</code></a>, <a href="https://dplyr.tidyverse.org/reference/select.html"><code>select()</code></a>, <a href="https://dplyr.tidyverse.org/reference/mutate.html"><code>mutate()</code></a>, <a href="https://dplyr.tidyverse.org/reference/summarise.html"><code>summarise()</code></a>, <a href="https://dplyr.tidyverse.org/reference/group_by.html"><code>group_by()</code></a> and more, as well as <a href="https://lubridate.tidyverse.org/"><code>{lubridate}</code></a> data and time manipulation functions, and base R <code>sum()</code>, <code>mean()</code>, <code>median()</code>, etc.</p>
 <section id="aggregation-examples" class="level2" data-number="3.1">
-
+<h2 data-number="3.1" class="anchored" data-anchor-id="aggregation-examples"><span class="header-section-number">3.1</span> Aggregation examples</h2>
+<section id="count-the-total-number-of-over-all-days" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="count-the-total-number-of-over-all-days"><span class="header-section-number">3.1.1</span> Count the total number of over all days</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>flows <span class="sc">|&gt;</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trips =</span> <span class="fu">sum</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 1 × 1    </span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>     n_trips</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>       <span class="sc">&lt;</span>dbl<span class="sc">&gt;</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="fl">591212295.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="count-total-number-of-trips-per-day" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="count-total-number-of-trips-per-day"><span class="header-section-number">3.1.2</span> Count total number of trips per day</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>flows <span class="sc">|&gt;</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date) <span class="sc">|&gt;</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trips =</span> <span class="fu">sum</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 4 × 2    </span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>  date          n_trips</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>date<span class="sc">&gt;</span>          <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2024-10-23</span> <span class="fl">148427847.</span></span>
+<span id="cb34-5"><a href="#cb34-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">2024-11-27</span> <span class="fl">148479109.</span></span>
+<span id="cb34-6"><a href="#cb34-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">2024-11-06</span> <span class="fl">149441508.</span></span>
+<span id="cb34-7"><a href="#cb34-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">2024-10-30</span> <span class="fl">144863831.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="count-total-number-of-work-trips-in-the-morning-hours-by-women-vs-men" class="level3" data-number="3.1.3">
+<h3 data-number="3.1.3" class="anchored" data-anchor-id="count-total-number-of-work-trips-in-the-morning-hours-by-women-vs-men"><span class="header-section-number">3.1.3</span> Count total number of work trips in the morning hours by women vs men</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>m_vs_f_morning_commute <span class="ot">&lt;-</span> flows <span class="sc">|&gt;</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(sex), hour <span class="sc">%in%</span> <span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>) <span class="sc">|&gt;</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date, sex) <span class="sc">|&gt;</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trips =</span> <span class="fu">sum</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(date, sex) <span class="sc">|&gt;</span></span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>m_vs_f_morning_commute</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 8 × 3</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  date       sex      n_trips</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="sc">&lt;</span>date<span class="sc">&gt;</span>     <span class="er">&lt;</span>fct<span class="sc">&gt;</span>      <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="dv">2024-10-23</span> female <span class="fl">11481768.</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="dv">2024-10-23</span> male   <span class="fl">10736460.</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span> <span class="dv">2024-10-30</span> female <span class="fl">11335501.</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span> <span class="dv">2024-10-30</span> male   <span class="fl">10596445.</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="dv">2024-11-06</span> female <span class="fl">11458701.</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span> <span class="dv">2024-11-06</span> male   <span class="fl">10719684.</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span> <span class="dv">2024-11-27</span> female <span class="fl">11488244.</span></span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span> <span class="dv">2024-11-27</span> male   <span class="fl">10740725.</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Plot it</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>m_vs_f_morning_commute_plot <span class="ot">&lt;-</span> m_vs_f_morning_commute <span class="sc">|&gt;</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> date, <span class="at">y =</span> n_trips, <span class="at">color =</span> sex)) <span class="sc">+</span></span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><img src="media/1-mobility-data/m-vs-f-morning-commute.png" class="img-fluid"></p>
+</section>
+</section>
+</section>
+<section id="slow-aggregation-convert-the-data-to-analysis-ready-format" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Slow aggregation? Convert the data to analysis-ready format</h1>
+<p>The aggregations above may take 30-60 seconds to complete. To make the analysis faster even on these few dates, convert the data to an analysis-ready format. By default it is DuckDB. All you need to do is to replace the <code>spod_get()</code> call with <code>spod_convert()</code> call, and then connect to the database with <code>spod_connect()</code>. The conversion for these few days we are working with will take just a minute or two.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>You can read more about the conversion and different formats in the <a href="https://ropenspain.github.io/spanishoddata/articles/convert.html">conversion vignette</a>. You can find the up to date speed test comparison of formats using mobility data in <a href="https://github.com/e-kotov/spanishoddata-paper-supplement/blob/main/plots/supplement-plots/12_analysis-speed.pdf" target="_blank">https://github.com/e-kotov/spanishoddata-paper-supplement/blob/main/plots/supplement-plots/12_analysis-speed.pdf</a>.</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>flows_db_path <span class="ot">&lt;-</span> <span class="fu">spod_convert</span>(</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">"origin-destination"</span>,</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">zones =</span> <span class="st">"districts"</span>,</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">dates =</span> dates</span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>flows_db <span class="ot">&lt;-</span> <span class="fu">spod_connect</span>(flows_db_path)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now try the same aggregations as above, but on the <code>flows_db</code> object. They should be much faster now, alsmost instant.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>flows_db <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trips =</span> <span class="fu">sum</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>flows_db <span class="sc">|&gt;</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(date) <span class="sc">|&gt;</span></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_trips =</span> <span class="fu">sum</span>(n_trips, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">.groups =</span> <span class="st">"drop"</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">|&gt;</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">collect</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 
 
 
 </section>
-</section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">3.1 Aggregation examples</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-mitms_mobility_web" class="csl-entry" role="listitem">
 Ministerio de Transportes y Movilidad Sostenible (MITMS). 2024. <span>“Estudio de La Movilidad Con Big Data (Study of Mobility with Big Data).”</span> <a href="https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data">https://www.transportes.gob.es/ministerio/proyectos-singulares/estudio-de-movilidad-con-big-data</a>.
 </div>
@@ -1310,6 +1437,9 @@ Flowmaps.”</span> July 3, 2025. <a href="https://doi.org/10.5281/zenodo.149144
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="./2-flowmapping.html" class="pagination-link" aria-label="📈 Tutorial: Flowmaps">
+        <span class="nav-page-text">📈 Tutorial: Flowmaps</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
