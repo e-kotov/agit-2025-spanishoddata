@@ -47,6 +47,76 @@
     "text": "install quarto extensions\nquarto install extension grantmcdermott/quarto-revealjs-clean\nquarto add mcanouil/quarto-iconify\n\n\n\nCitationBibTeX citation:@online{kotov2025,\n  author = {Kotov, Egor},\n  title = {AGIT 2025 {Workshop:} {Analysing} {Massive} {Open} {Human}\n    {Mobility} {Data} in {R} {Using} Spanishoddata, Duckdb and Flowmaps},\n  date = {2025-07-03},\n  url = {https://www.ekotov.pro/agit-2025-spanishoddata/markdown-setup.html},\n  doi = {10.5281/zenodo.14914417},\n  langid = {en}\n}\nFor attribution, please cite this work as:\nKotov, Egor. 2025. “AGIT 2025 Workshop: Analysing Massive Open\nHuman Mobility Data in R Using Spanishoddata, Duckdb and\nFlowmaps.” July 3, 2025. https://doi.org/10.5281/zenodo.14914417."
   },
   {
+    "objectID": "slides.html#what-we-will-do-today-1",
+    "href": "slides.html#what-we-will-do-today-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "What we will do today?",
+    "text": "What we will do today?\n\nexplore data\ndiscuss insights, idea and limitations\npotentially co-author a workshop-report short paper (in less than 2 weeks, strict deadline) with some visualisations and insights"
+  },
+  {
+    "objectID": "slides.html#survey-based-human-mobility",
+    "href": "slides.html#survey-based-human-mobility",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Survey-based human mobility",
+    "text": "Survey-based human mobility\nEuropean Labour Force Surveys\n\n\nSource: https://ec.europa.eu/eurostat/web/microdata/european-union-labour-force-survey  Image source: https://ec.europa.eu/eurostat/documents/345175/17780010/2021-NUTS-3-map-ES.pdf"
+  },
+  {
+    "objectID": "slides.html#survey-based-human-mobility-1",
+    "href": "slides.html#survey-based-human-mobility-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Survey-based human mobility",
+    "text": "Survey-based human mobility\nGerman Mobility Survey\n\n\nSource: https://www.mobilitaet-in-deutschland.de/"
+  },
+  {
+    "objectID": "slides.html#census-based-human-mobility",
+    "href": "slides.html#census-based-human-mobility",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Census-based human mobility",
+    "text": "Census-based human mobility\nUK Census\n\n\nSource: https://commute.datashine.org.uk/"
+  },
+  {
+    "objectID": "slides.html#census-based-human-mobility-1",
+    "href": "slides.html#census-based-human-mobility-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Census-based human mobility",
+    "text": "Census-based human mobility\nUK Census\n\n\nSource: https://commute.datashine.org.uk/"
+  },
+  {
+    "objectID": "slides.html#register-based-human-mobility",
+    "href": "slides.html#register-based-human-mobility",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Register-based human mobility",
+    "text": "Register-based human mobility\nNetherlands Register Data\n\n\nSource: https://www.flowmap.blue/1Oe3zM219uSfJ3sjdRT90SAK2kU3xIvzdcCW6cwTsAuc  Data: https://opendata.cbs.nl/#/CBS/nl/dataset/83628NED/table?dl=F076"
+  },
+  {
+    "objectID": "slides.html#iot-gps-data",
+    "href": "slides.html#iot-gps-data",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "IOT GPS Data",
+    "text": "IOT GPS Data\nThe Volkswagen leak\n\n\nSource: https://media.ccc.de/v/38c3-wir-wissen-wo-dein-auto-steht-volksdaten-von-volkswagen"
+  },
+  {
+    "objectID": "slides.html#mobile-apps-mobile-network-gps-data",
+    "href": "slides.html#mobile-apps-mobile-network-gps-data",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Mobile Apps + Mobile Network GPS Data",
+    "text": "Mobile Apps + Mobile Network GPS Data\nApp usage by Orange customers in France\n\n\nImage source: Martínez-Durive et al. (2023)"
+  },
+  {
+    "objectID": "slides.html#mobile-phone-data",
+    "href": "slides.html#mobile-phone-data",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Mobile phone data",
+    "text": "Mobile phone data\nFlowminder\n\nMobile phone data for humanitarian and development efforts in low- and middle-income countries\n\nSource: https://www.flowminder.org/what-we-do/population-distribution-and-mobility-analysis#data-applications"
+  },
+  {
+    "objectID": "slides.html#flowminder-software",
+    "href": "slides.html#flowminder-software",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Flowminder Software",
+    "text": "Flowminder Software\nFlowKit - privacy preserving mobile phone data aggregation\n\n\nLearn more: https://github.com/Flowminder/FlowKit,  https://www.flowminder.org/what-we-do/mobile-data-partnerships/flowkit"
+  },
+  {
     "objectID": "slides.html#spanish-open-mobility-big-data-1",
     "href": "slides.html#spanish-open-mobility-big-data-1",
     "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
@@ -59,6 +129,111 @@
     "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
     "section": "Spanish Open Mobility Big Data",
     "text": "Spanish Open Mobility Big Data\n3500+ zones across Spain and beyond\n\n\n\n\n\n\n\nData by Ministerio de Transportes y Movilidad Sostenible (MITMS) (2024)\nBased on 13 million customers of Orange Spain, expanded to full population of Spain\nData interface"
+  },
+  {
+    "objectID": "slides.html#spanish-open-mobility-big-data-3",
+    "href": "slides.html#spanish-open-mobility-big-data-3",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Spanish Open Mobility Big Data",
+    "text": "Spanish Open Mobility Big Data\n\n\nView the dashboard at https://data.transportes.gob.es/public/mov-diaria-mensual"
+  },
+  {
+    "objectID": "slides.html#spanish-open-mobility-big-data-4",
+    "href": "slides.html#spanish-open-mobility-big-data-4",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Spanish Open Mobility Big Data",
+    "text": "Spanish Open Mobility Big Data\n\n\nView the dashboard at https://data.transportes.gob.es/public/mov-provincial"
+  },
+  {
+    "objectID": "slides.html#spanish-open-mobility-big-data-5",
+    "href": "slides.html#spanish-open-mobility-big-data-5",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Spanish Open Mobility Big Data",
+    "text": "Spanish Open Mobility Big Data\n\n\nView the dashboard at https://mapas-movilidad.transportes.gob.es/?date=2025-04-16T22"
+  },
+  {
+    "objectID": "slides.html#spanish-open-mobility-big-data-6",
+    "href": "slides.html#spanish-open-mobility-big-data-6",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Spanish Open Mobility Big Data",
+    "text": "Spanish Open Mobility Big Data\nAcademic research\n\n\nSource: https://github.com/e-kotov/spanishoddata-paper-supplement  https://doi.org/10.5281/zenodo.15207374"
+  },
+  {
+    "objectID": "slides.html#spanish-open-mobility-big-data-7",
+    "href": "slides.html#spanish-open-mobility-big-data-7",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Spanish Open Mobility Big Data",
+    "text": "Spanish Open Mobility Big Data\nEffects of human mobility on dispersal of disease-transmitting mosquitoes\n\n\n\n\nUses Labour Force Survey data(Lucati et al. 2022)\n\n\n\n\nBuilds on previous research using mobile phone based data(Kotov, Bartumeus, and Palmer 2024)"
+  },
+  {
+    "objectID": "slides.html#multi-mno-project-1",
+    "href": "slides.html#multi-mno-project-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Multi-MNO Project",
+    "text": "Multi-MNO Project\n\n\nSource: https://cros.ec.europa.eu/landing-page/multi-mno-project"
+  },
+  {
+    "objectID": "slides.html#multi-mno-project-2",
+    "href": "slides.html#multi-mno-project-2",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Multi-MNO Project",
+    "text": "Multi-MNO Project\nMobility data aggregation using unified methodology\n\n\n\n\n![](media/mobility-data-slides/tf-mno-position-paper.png\n\n\nSource: https://cros.ec.europa.eu/system/files/2023-12/20231109_dimeitdg_mnoposition_paper_ricciato_ho%20%281%29.pdf  Learn more: https://ec.europa.eu/eurostat/web/products-statistical-reports/w/ks-ft-23-001"
+  },
+  {
+    "objectID": "slides.html#multi-mno-project-3",
+    "href": "slides.html#multi-mno-project-3",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Multi-MNO Project",
+    "text": "Multi-MNO Project\nHow it works\n\n\nSource https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf"
+  },
+  {
+    "objectID": "slides.html#multi-mno-software",
+    "href": "slides.html#multi-mno-software",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Multi-MNO Software",
+    "text": "Multi-MNO Software\nhttps://github.com/eurostat/multimno\n\n\nSource https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf"
+  },
+  {
+    "objectID": "slides.html#multi-mno-outputs",
+    "href": "slides.html#multi-mno-outputs",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Multi-MNO Outputs",
+    "text": "Multi-MNO Outputs\nWhat to expect?\n\n\nSource https://cros.ec.europa.eu/system/files/2024-02/20240226_MultiMNO_2021-0400-internal-meeting-MNOs-ricciato.pdf"
+  },
+  {
+    "objectID": "slides.html#spanishoddata",
+    "href": "slides.html#spanishoddata",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "spanishoddata",
+    "text": "spanishoddata\naccess Spanish Open Mobility Big Data from R\n\n\nSource: https://ropenspain.github.io/spanishoddata/articles/v1-2020-2021-mitma-data-codebook.html"
+  },
+  {
+    "objectID": "slides.html#spanishoddata---access-open-human-mobility-data",
+    "href": "slides.html#spanishoddata---access-open-human-mobility-data",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "spanishoddata - access open human mobility data",
+    "text": "spanishoddata - access open human mobility data\nA package with many companions\n\n\n\n  \n  \n    \n  \n\n  \n  \n    \n  \n\n  \n  \n    \n  \n\n\n    \n  \n\n\n\n\nDetailed documentation\n\n\n\nLogos are the property of their respective owners."
+  },
+  {
+    "objectID": "slides.html#spanishoddata-use-cases",
+    "href": "slides.html#spanishoddata-use-cases",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "spanishoddata use cases",
+    "text": "spanishoddata use cases\nSplit work and non-work trips\n\n\n\n\nSource: https://github.com/e-kotov/2024-30DayMapChallenge"
+  },
+  {
+    "objectID": "slides.html#spanishoddata-use-cases-1",
+    "href": "slides.html#spanishoddata-use-cases-1",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "spanishoddata use cases",
+    "text": "spanishoddata use cases\nSplit into different trip types\n\n\nSource: https://github.com/e-kotov/spanishoddata-paper-supplement, https://doi.org/10.5281/zenodo.15207374"
+  },
+  {
+    "objectID": "slides.html#spanishoddata-use-cases-2",
+    "href": "slides.html#spanishoddata-use-cases-2",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "spanishoddata use cases",
+    "text": "spanishoddata use cases\nSplit into different trip types\n\n\nSource: https://github.com/e-kotov/spanishoddata-paper-supplement, https://doi.org/10.5281/zenodo.15207374"
   },
   {
     "objectID": "slides.html#get-the-data",
@@ -129,6 +304,20 @@
     "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
     "section": "DuckDB in Action",
     "text": "DuckDB in Action\nSummary over multiple groups on full data set\n\n\n\nlibrary(dplyr)\n\nod_data |&gt;\n  group_by(\n    year,\n    month,\n    day,\n    id_origin,\n    id_destination\n  )\n  summarise(\n    n_trips = mean(n_trips)\n  ) |&gt;\n  collect()\n\n\n\n\n\n\nLogos are the property of their respective owners.\nOnly for illustration purposes. May not accurately represent actual GB usage and DuckDB operation."
+  },
+  {
+    "objectID": "slides.html#flowmaps-with-flowmapper-and-flowmapblue",
+    "href": "slides.html#flowmaps-with-flowmapper-and-flowmapblue",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Flowmaps with {flowmapper} and {flowmapblue}",
+    "text": "Flowmaps with {flowmapper} and {flowmapblue}\n{flowmapblue} (Boyandin 2024) for interactive flowmaps\n{flowmapper} (Mast 2024) for static flowmaps and producing spatial data\n\n\nSource: https://www.flowmap.blue/1Oe3zM219uSfJ3sjdRT90SAK2kU3xIvzdcCW6cwTsAuc  Data: https://opendata.cbs.nl/#/CBS/nl/dataset/83628NED/table?dl=F076"
+  },
+  {
+    "objectID": "slides.html#tutorial-website",
+    "href": "slides.html#tutorial-website",
+    "title": "Analysing massive open human mobility data using {spanishoddata}, {duckdb}, and flowmaps",
+    "section": "Tutorial website",
+    "text": "Tutorial website\nhttps://www.ekotov.pro/agit-2025-spanishoddata/"
   },
   {
     "objectID": "software-setup.html",
