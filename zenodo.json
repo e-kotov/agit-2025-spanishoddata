@@ -28,11 +28,7 @@
       "scheme": "url",
       "identifier": "https://www.ekotov.pro/agit-2025-spanishoddata/",
       "relation": "compiles",
-      "resource_type": "publication-technicalnote"
-    },
-    {
-      "relation": "isNewVersionOf",
-      "resource_type": "publication-technicalnote"
+      "resource_type": "lesson"
     }
   ],
   "language": "eng",
