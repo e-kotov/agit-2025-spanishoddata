@@ -10,7 +10,7 @@ website:
   site-url: https://www.ekotov.pro/agit-2025-spanishoddata/
   repo-url: https://github.com/e-kotov/agit-2025-spanishoddata
   open-graph:
-    title: "Mobility Flows and Accessibility Using R and Big Open Data"
+    title: "Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps"
     image: media/card.png
     image-alt: "Workshop on Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps, AGIT 2025 conference, Salzburg, Austria, July 3, 2025. Tutors: Egor Kotov"
     description: "Workshop on Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps, AGIT 2025 conference, Salzburg, Austria, July 3, 2025. Tutors: Egor Kotov. This workshop will teach you how to use the R package spanishoddata to access open human mobility data and how to aggregate it with duckdb. We will also explore how to visualize mobility flows using R package flowmapper and flowmapblue."
