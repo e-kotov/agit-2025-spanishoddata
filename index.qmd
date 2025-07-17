@@ -19,7 +19,7 @@ The workshop addresses these challenges by showcasing end-to-end workflows that 
 ```{=html}
 <figure class="video" style="width:70%; margin: auto;">
   <video autoplay muted loop playsinline controls style="width:100%; height:auto;">
-    <source src="media/flowmapblue-standard-time.mp4" type="video/mp4">
+    <source src="media/mobility-data-slides/flowmapblue-standard-time.mp4" type="video/mp4">
   </video>
     <figcaption style="text-align:center; margin-bottom:0.5em;">
     Hourly daily mobility flows for almost 5 full years
@@ -27,13 +27,14 @@ The workshop addresses these challenges by showcasing end-to-end workflows that 
 </figure>
 ```
 
+
 Spanish open mobility data is used as a case study. This data contains anonymized and grouped flows between more than 3500 locations in Spain with hourly intervals across more than 3 full years. The flows are further split by age and income groups, sex, and activity type (home, work, regular, irregular) at both origin and destination, thereby presenting a universe of opportunities for analysis and research questions to explore.
 
 
 ```{=html}
 <figure class="video" style="width:70%; margin: auto;">
   <video autoplay muted loop playsinline controls style="width:100%; height:auto;">
-    <source src="media/spain-folding-flows.mp4" type="video/mp4">
+    <source src="media/mobility-data-slides/spain-folding-flows.mp4" type="video/mp4">
   </video>
       <figcaption style="text-align:center; margin-bottom:0.5em;">
     Mobility flows covering all of Spain and beyond
