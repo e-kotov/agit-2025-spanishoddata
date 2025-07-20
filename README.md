@@ -1,3 +1,5 @@
+[![DOI:10.5281/zenodo.15794849](https://zenodo.org/badge/DOI/10.5281/zenodo.15794849.svg)](https://doi.org/10.5281/zenodo.15794849)
+
 This repository contains the source code (in main branch) and compiled website (in gh-pages branch) for the workshop and tutorial "Analysing massive open human mobility data in R using spanishoddata, duckdb and flowmaps" workshop at AGIT 2025 conference [https://agit.at/en/](https://agit.at/en/) in Salzburg.
 
 ![](media/card.png)
